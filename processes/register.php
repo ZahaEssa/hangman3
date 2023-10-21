@@ -8,6 +8,7 @@ class UserUpdater {
         $this->con = $con;
     }
 
+    // Check if the given username already exists in the database
     public function usernameExists($username) {
         $stmt = $this->con->prepare("SELECT gamer_id FROM verify WHERE gamer_username = ?");
         $stmt->bind_param("s", $username);
@@ -16,9 +17,11 @@ class UserUpdater {
         return $stmt->num_rows > 0;
     }
 
+    // Update user information in the database
     public function updateUser($gamer_id, $username, $password, $confirmPassword) {
         if ($password === $confirmPassword) {
             if ($this->usernameExists($username)) {
+                // Display an error message if the username already exists
                 echo "<div style='background-color: #FF0000; color: white; padding: 10px; text-align: center;'>";
                 echo "Username already exists. Please choose a different username.";
                 echo "You will be automatically redirected to the sign-up page. ";
@@ -29,6 +32,7 @@ class UserUpdater {
             } else {
                 $hashpass = password_hash($password, PASSWORD_DEFAULT);
 
+                // Update user data in the database
                 $stmt = $this->con->prepare("UPDATE verify SET gamer_username=?, password=? WHERE gamer_id=?");
                 $stmt->bind_param("ssi", $username, $hashpass, $gamer_id);
 
@@ -36,12 +40,14 @@ class UserUpdater {
                     header("Location: ../signin.php");
                     exit();
                 } else {
+                    // Display an error message if there's an issue updating user data
                     echo "<div style='background-color: #FF0000; color: white; padding: 10px; text-align: center;'>";
                     echo "Error updating user: " . $stmt->error;
                     echo "</div>";
                 }
             }
         } else {
+            // Display an error message if passwords do not match
             echo "<div style='background-color: #FF0000; color: white; padding: 10px; text-align: center;'>";
             echo "Passwords do not match!<br><br> ";
             echo "You will be automatically redirected to the sign-up page. ";
