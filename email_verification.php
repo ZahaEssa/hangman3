@@ -101,7 +101,7 @@
                         <input type="email" class="form-control" id="email" name="email" required>
                     </div>
                     <div class="form-group text-center">
-                        <input type="submit" value="Send" name="send" class="btn btn-primary">
+                        <input type="submit" value="Send Verification Email" name="send" class="btn btn-primary">
                     </div>
                 </form>
                 <p class="text-center">Already have an account? <a href="signin.php">Sign In Here</a></p>
