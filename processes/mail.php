@@ -105,7 +105,10 @@ if (isset($_POST["send"])) {
                     echo "Failed to send email."; //indicates an issue with email delivery
                 }
             } else {
-                echo "Failed to insert user data."; //problems with database operations
+                // Display the specific database error
+                echo "<div style='background-color: #FF0000; color: white; padding: 10px; text-align: center;'>";
+                echo "Error inserting user data: " . $stmt->error; // Use mysqli_error for mysqli, or appropriate error handling for your setup
+                echo "</div>";
             }
         }
     }
