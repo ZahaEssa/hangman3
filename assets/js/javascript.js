@@ -53,9 +53,8 @@ function startTimer() {
 
 
 
-function startGame(chosenLevel, chosenCategory) {
+function startGame(chosenLevel) {
   hangmanGame.gameLevel = chosenLevel;
-  hangmanGame.currentCategory = chosenCategory; // Set the chosen category
   if (chosenLevel === "easy") {
     timerDuration = 120; // Set the timer duration for the easy level (30 seconds)
   } else if (chosenLevel === "medium") {
