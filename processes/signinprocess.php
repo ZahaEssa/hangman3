@@ -24,7 +24,7 @@ class SignInManager {
                 if (password_verify($password, $storedPassword)) {
                     session_start();
                     $_SESSION["data"] = $gamerRow;
-                    header("Location: ../homepage.php");
+                    header("Location: ../index.html");
                     exit();
                 } else {
                     $error_message = "Incorrect password";
