@@ -102,10 +102,10 @@ if (isset($_POST["send"])) {
                     echo "</div>";
                     header("refresh:8;url=../index.php");
                 } else {
-                    echo "Failed to send email.";
+                    echo "Failed to send email."; //indicates an issue with email delivery
                 }
             } else {
-                echo "Failed to insert user data.";
+                echo "Failed to insert user data."; //problems with database operations
             }
         }
     }
