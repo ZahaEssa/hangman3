@@ -183,85 +183,28 @@ function changeLevel(newLevel) {
 }
 
 // Set the base points based on the level
-function startGame(chosenLevel, chosenCategory) {
+function startGame(chosenLevel) {
   hangmanGame.gameLevel = chosenLevel;
-  hangmanGame.currentCategory = chosenCategory;
-
   if (chosenLevel === "easy") {
-    // Set parameters for the 'easy' level
-    if (chosenCategory === "Colors"&&chosenLevel === "easy") {
-      hangmanGame.maxNumChances = 10;
-      hangmanGame.pointValue = 10;
-      hangmanGame.bonusPoints = 20;
-      timerDuration = 120; // Set a 30-second timer for the easy level
-  
-    } else if (chosenCategory === "Fruits"&&chosenLevel === "easy") {
-      hangmanGame.maxNumChances = 10;
-      hangmanGame.pointValue = 10;
-      hangmanGame.bonusPoints = 20;
-      timerDuration = 120; // Set a 30-second timer for the easy level
-  
-    } else if (chosenCategory === "Animals"&&chosenLevel === "easy") {
-      hangmanGame.maxNumChances = 10;
-      hangmanGame.pointValue = 10;
-      hangmanGame.bonusPoints = 20;
-      timerDuration = 120; // Set a 30-second timer for the easy level
-  
-    }
-    // Add more categories and their parameters as needed
-
     document.getElementById("level").style.color = "green";
+    hangmanGame.maxNumChances = 10;
+    hangmanGame.pointValue = 10;
+    hangmanGame.bonusPoints = 20;
+    timerDuration = 120; // Set a 30-second timer for the easy level
   } else if (chosenLevel === "medium") {
-    // Set parameters for the 'medium' level
-    if (chosenCategory === "Movies"&&chosenLevel === "medium") {
-      document.getElementById("level").style.color = "gold";
-      hangmanGame.maxNumChances = 8;
-      hangmanGame.pointValue = 25;
-      timerDuration = 180; // Set a 45-second timer for the medium level
-  
-    } else if (chosenCategory === "VideoGames"&&chosenLevel === "medium") {
-      document.getElementById("level").style.color = "gold";
-    hangmanGame.maxNumChances = 8;
-    hangmanGame.pointValue = 25;
-    timerDuration = 180; // Set a 45-second timer for the medium level
-
-    } else if (chosenCategory === "Countries"&&chosenLevel === "medium") {
-      document.getElementById("level").style.color = "gold";
-    hangmanGame.maxNumChances = 8;
-    hangmanGame.pointValue = 25;
-    timerDuration = 180; // Set a 45-second timer for the medium level
-
-    }
-
-
     document.getElementById("level").style.color = "gold";
-  }  else if (chosenLevel === "hard") {
-    // Set parameters for the 'hard' level
-    if (chosenCategory === "HistoricalFigures" && chosenLevel === "hard") {
-      hangmanGame.maxNumChances = 6;
-    hangmanGame.pointValue = 50;
-    timerDuration = 300; 
-  
-    }   else if (chosenCategory === "FamousNovels" && chosenLevel === "hard") {
-      hangmanGame.maxNumChances = 6;
-      hangmanGame.pointValue = 50;
-      timerDuration = 300; 
-    }
-    else if (chosenCategory === "Scientists" && chosenLevel === "hard") {
-      hangmanGame.maxNumChances = 6;
-      hangmanGame.pointValue = 50;
-      timerDuration = 300; 
-    }
-  
-
+    hangmanGame.maxNumChances = 8;
+    hangmanGame.pointValue = 25;
+    timerDuration = 180; // Set a 45-second timer for the medium level
+  } else {
     document.getElementById("level").style.color = "red";
+    hangmanGame.maxNumChances = 6;
+    hangmanGame.pointValue = 50;
+    timerDuration = 300; // Set a 60-second timer for the hard level
   }
-
-  // Reset the game and start it
   resetGame();
   gameStart();
 }
-
 
 function resetGame() {
   alphabet = "abcdefghijklmnopqrstuvwxyz".toUpperCase().split('');
