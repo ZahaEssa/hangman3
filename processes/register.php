@@ -23,8 +23,8 @@ class UserUpdater {
             if ($this->usernameExists($username)) {
                 // Display an error message if the username already exists
                 echo "<div style='background-color: #FF0000; color: white; padding: 10px; text-align: center;'>";
-                echo "Username already exists. Please choose a different username.";
-                echo "You will be automatically redirected to the sign-up page. ";
+                echo "Username already exists. Please choose a different username.<br><br>";
+                echo "You will be automatically redirected to the sign-up page. <br>";
                 echo "If not, <a href='../signup.php' style='color: white; text-decoration: underline;'>click here</a>.<br><br>";
                 echo "</div>";
                 header("Refresh: 5; URL=../signup.php"); 
@@ -49,7 +49,7 @@ class UserUpdater {
         } else {
             // Display an error message if passwords do not match
             echo "<div style='background-color: #FF0000; color: white; padding: 10px; text-align: center;'>";
-            echo "Passwords do not match!<br><br> ";
+            echo "Passwords do not match<br><br> ";
             echo "You will be automatically redirected to the sign-up page. ";
             echo "If not, <a href='../signup.php' style='color: white; text-decoration: underline;'>click here</a>.<br><br>";
             echo "</div>";
