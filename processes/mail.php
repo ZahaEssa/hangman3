@@ -29,7 +29,7 @@ class Mail {
             $this->mail->isHTML(true);
             $this->mail->Subject = $subject;
             $link = "https://localhost/hangman3/processes/verify.php?token=$token";
-            
+
             $this->mail->Body = "
                 Hello $fullname,<br><br>
                 
@@ -72,22 +72,15 @@ if (isset($_POST["send"])) {
         header("refresh:7;url=../email_verification.php");
         echo "</div>";
     } else {
-        $checkStmt = $con->prepare("SELECT gamer_id FROM verify WHERE email = ?");
+        // Check if the email already exists in the database
+        $checkSql = "SELECT email FROM verify WHERE email = ?";
+        $checkStmt = $con->prepare($checkSql);
         $checkStmt->bind_param("s", $email);
         $checkStmt->execute();
         $checkStmt->store_result();
 
-        if ($checkStmt->num_rows > 0) {
-            // Display an error message and redirect to the email verification page
-            echo "<div style='background-color: #FF0000; color: white; padding: 10px; text-align: center;'>";
-            echo "Email already exists. Please use a different email. <br><br>";
-            echo "You will be automatically redirected to the email verification page. ";
-            echo "If not, <a href='../email_verification.php' style='color: white; text-decoration: underline;'>click here</a>.<br><br>";
-            echo "</div>";
-            header("Refresh: 5; URL=../email_verification.php");
-            exit();
-        } else {
-            // If the email doesn't exist, insert the new record
+        if ($checkStmt->num_rows == 0) {
+            // Email doesn't exist, proceed with the insertion
             $sql = "INSERT INTO verify (fullname, token, email, expiry_time) VALUES (?, ?, ?, ?)";
             $stmt = $con->prepare($sql);
             $stmt->bind_param("ssss", $fullname, $token, $email, $expire);
@@ -102,15 +95,23 @@ if (isset($_POST["send"])) {
                     echo "</div>";
                     header("refresh:8;url=../index.php");
                 } else {
-                    echo "Failed to send email."; //indicates an issue with email delivery
+                    echo "Failed to send email."; // Indicates an issue with email delivery
                 }
             } else {
-                
                 echo "<div style='background-color: #FF0000; color: white; padding: 10px; text-align: center;'>";
                 echo "Error inserting user data: " . $stmt->error; // Display the specific database error
                 echo "</div>";
             }
-        }
+        } else {
+            // Email already exists, redirect to the email verification page 
+            echo "<div style='background-color: #FF0000; color: white; padding: 10px; text-align: center;'>";
+            echo "Email already exists. Redirecting to the email verification page... <br>";
+            echo "<br><br>";
+            echo "If you are not redirected, <a href='../email_verification.php' style='color: white; text-decoration: underline;'>click here</a>.";
+            echo "</div>";
+            header("refresh:7;url=../email_verification.php"); // Redirect after 5 seconds
+            exit; 
+        }  
     }
 }
 ?>
