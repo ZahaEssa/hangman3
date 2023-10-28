@@ -1,171 +1,92 @@
 <!DOCTYPE html>
-<html>
-  <head>
+<html lang="en">
+<head>
     <meta charset="UTF-8">
-    <title>Hangman</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous">
-    </script>
-    <link rel="stylesheet" href="css/style.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="https://fonts.googleapis.com/css?family=Inconsolata|Homemade+Apple" rel="stylesheet">
-  </head>
-  <body>
-    <div id="startScreen">
-      <div class="container-fluid">
-        <h1 class="mainTitle">Hangman</h1>
-        <h2>Start Game - Pick a Category</h2>
-        <div class="button-container">
-        <button onclick="startGame('easy', 'Colors');">Easy - Colors</button>
-        <button onclick="startGame('medium', 'Movies');">Medium - Movies</button>
-        <button onclick="startGame('hard', 'FamousNovels');">Hard - Famous Novels</button>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to Hangman Game</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+ 
+    <style>
+       
+        body {
+            background: linear-gradient(45deg, white);
+            color: #333;
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            justify-content: center; 
+            align-items: center;
+            min-height: 100vh; 
+            margin: 0; 
+        }
 
-       </div> 
-      </div>
-    </div>
-    <div id="helpScreen">
-      <div class="container">
-        <button onclick="helpHide();"></button>
-        <div class="jumbotron">
-          <h1>Rules of the game</h1>
-          <p>Guess the word correctly by guessing the letters in the word. You only have a limited number of guesses before you lose the game.</p>
-          <p>Easy Difficulty: Win: +10 points | Bonus points: If the word is guessed within 30 seconds, the bonus points awarded are 20 points and if answered any time after 30 seconds no bonus point is awarded | 10 Incorrect Guesses Allowed</p>
-          <p>Medium Difficulty: Win: +25 points | Bonus points: If the word is guessed within 45 seconds, the bonus points awarded are 50 points and if answered any time after 45 seconds no bonus point is awarded | 8 Incorrect Guesses Allowed</p>
-          <p>Hard Difficulty: Win: +50 points | Bonus points: If the word is guessed within 60 seconds, the bonus points awarded are 70 points and if answered any time after 60 seconds no bonus point is awarded | 6 Incorrect Guesses Allowed</p>
-          <p>Restarting the Game will reset all stats</p>
-         
+        .container {
+            text-align: center;
+        }
+
+        h1, h2 {
+            color: #FF6B6B;
+            font-family: 'Cursive', cursive;
+            -webkit-text-stroke: 1px #333;
+        }
+
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 2rem;
+        }
+
+        h2 {
+            font-size: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .nav-links {
+            margin: 2rem 0;
+        }
+        .nav-links span {
+    font-size: 1.8rem;
+}
+
+        .nav-links a {
+            font-size: 1.5rem;
+            margin: 0 1rem;
+            padding: 0.5rem 1rem;
+            text-decoration: none;
+            background-color: #FF6B6B;
+            color: #F8F8F8;
+            border-radius: 25px;
+        }
+
+        .nav-links a:hover {
+            background-color: #FF5733;
+        }
+
+        .hangman-image {
+            max-width: 70%;
+            height: auto;
+            mix-blend-mode: multiply; 
+        }
+       
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img class="hangman-image" src="images/index/hangman.jpg" alt="Hangman Image"> 
+        <h1 class="display-4">Welcome to </h1>
+        <img class="letter-image" src="images/index/H.png" alt="H">
+        <img class="letter-image" src="images/index/A.png" alt="A">
+        <img class="letter-image" src="images/index/N.png" alt="N">
+        <img class="letter-image" src="images/index/G.png" alt="G">
+        <img class="letter-image" src="images/index/M.png" alt="M">
+        <img class="letter-image" src="images/index/A.png" alt="A">
+        <img class="letter-image" src="images/index/N.png" alt="N">
+        <h2>Get ready to play!</h2>
+        <div class="nav-links">
+        <a href="/email_Verification">Create Account</a>
+            <span>or</span>
+            <a href="/signin ">Log In</a>
         </div>
-      </div>
     </div>
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col-lg-3 col-lg-offset-1 col-md-3 col-md-offset-1 hidden-sm hidden-xs visible-md visible-lg visible-xl sectionBorder">
-          <div id="scoreboard">
-            <div class="row">
-              <div class="col-md-6">
-                <p>Score</p>
-              </div>
-              <div class="col-md-5 scoreboardScore">
-                <p id="score">0</p>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-md-6">
-                <p>Wins</p>
-              </div>
-              <div class="col-md-5 scoreboardScore">
-                <p id="wins">0</p>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-md-6">
-                <p>Losses</p>
-              </div>
-              <div class="col-md-5 scoreboardScore">
-                <p id="losses">0</p>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-md-6">
-                <p>Level</p>
-              </div>
-              <div class="col-md-5">
-                <p id="level"></p>
-              </div>
-            </div>
-            <div class="row" style="margin-top: 20px;">
-              <div class="col-md-6">
-                <p>Chances Left</p>
-              </div>
-              <div class="col-md-5 scoreboardScore">
-                <p id="chancesLeft">10</p>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-md-6">
-                <p>Last Guess</p>
-              </div>
-              <div class="col-md-5 scoreboardScore">
-                <p id="lastLetter">-</p>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-md-6">
-                <p>Time Left</p>
-              </div>
-              <div class="col-md-5 scoreboardScore">
-                <p id="timerDisplay">30</p> 
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-7 col-md-7 col-sm-12 col-xs-12 sectionBorder">
-          <div class="row">
-            <div class="col-xs-4">
-              <h1 class="mainTitle">Hangman</h1>
-            </div>
-            <div class="col-xs-8">
-              <nav class="navbar">
-                <div class="container-fluid">
-                  <div class="navbar-header">
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-1" aria-expanded="false">
-                      <span class="icon-bar" style="background-color: black"></span>
-                      <span class="icon-bar" style="background-color: black"></span>
-                      <span class="icon-bar" style="background-color: black"></span>
-                    </button>
-                  </div>
-                  <div class="collapse navbar-collapse" id="navbar-collapse-1">
-                    <ul class="nav navbar-nav navbar-right">
-                      <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Category</a>
-                        <ul class="dropdown-menu">
-                          <li id="easyGame"><a href="#" onclick="changeLevel('easy','Colors');">Easy-Colors</a></li>
-                      
-                         
-                          <li id="mediumGame"><a href="#" onclick="changeLevel('medium','Movies');">Medium-movies</a></li>
-                        
-                          <li id="hardGame"><a href="#" onclick="changeLevel('hard','FamousNovels');">Hard- famous novels</a></li>
-                   
-                        </ul>
-                      </li>
-                      <li><a class="helpButton" href="#" onclick="help();">Help</a></li>
-                      <li><a href="#" onclick="restart();">Restart</a></li>
-                    
-                      <li class="visible-sm visible-xs invisible-md invisible-lg invisible-xl"><p>Score: <span id="scorePhone">0</span></p></li>
-                      <li class="visible-sm visible-xs invisible-md invisible-lg invisible-xl"><p>Wins: <span id="winsPhone">0</span></p></li>
-                      <li class="visible-sm visible-xs invisible-md invisible-lg invisible-xl"><p>Losses: <span id="lossesPhone">0</span></p></li>
-                      <li class="visible-sm visible-xs invisible-md invisible-lg invisible-xl"><p>Level: <span id="levelPhone">Easy</span></p></li>
-                      <li class="visible-sm visible-xs invisible-md invisible-lg invisible-xl"><p>Chances Left: <span id="chancesLeftPhone">10</span></p></li>
-                      <li class="visible-sm visible-xs invisible-md invisible-lg invisible-xl"><p>Last Guess: <span id="lastLetterPhone">-</span></p></li>
-                    </ul>
-                  </div>
-                </div>
-              </nav>
-            </div>
-          </div>
-          <div class="row gameArea">
-            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 hangmanPerson">
-              <div class="hanging">
-                <img class="bellImg" id="hangman">
-              </div>
-              <img src="images/hanger.png">
-            </div>
-            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 wordArea">
-              <h1 id="wordDisplay"></h1>
-            </div>
-          </div>
-          <div class="row">
-            <div id="usedLetters"></div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <script src="js/words.js"></script>
-    <script src="js/javascript.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
-
-
-  </body>
+  
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+</body>
 </html>
