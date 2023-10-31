@@ -2,66 +2,45 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Carbon\Carbon;
-use Illuminate\Support\Str;
-use App\Mail\VerificationEmail;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Mail;
-use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\DB; // Import the database facade
 
 class EmailVerificationController extends Controller
 {
-    public function sendVerificationEmail(Request $request)
-    {
-        $email = $request->input('email');
-        $fullname = $request->input('fullname');
-        $token = Str::random(32);
+    public function emailVerification(Request $request,$token)
+{
+   
+    $currentTime = now()->setTimezone('Africa/Nairobi');
 
-        // Calculate the expiration time
-        $expire = Carbon::now()->addMinutes(2);
+    // Debug: Check the token
+    //dd($token);
 
-        // Save email, fullname, token, and expiration time to your database
-        $verificationRecord = [
-            'email' => $email,
-            'fullname' => $fullname,
-            'token' => $token,
-            'expiry_time' => $expire,
-        ];
+    $result = DB::table('verify')
+        ->select('gamer_id', 'email')
+        ->where('token', $token)
+        ->where('expiry_time', '>=', $currentTime)
+        ->first();
 
-        DB::table('verify')->insert($verificationRecord);
+    // Debug: Check the result
+    //dd($result);
 
-        // Send the verification email
-        Mail::to($email)->send(new VerificationEmail($fullname, $token));
+    if ($result) {
+        $newToken = bin2hex(random_bytes(16));
+        DB::table('verify')
+            ->where('gamer_id', $result->gamer_id)
+            ->update(['token' => $newToken]);
 
-        return redirect('/email_Verification')->with('email', $email);
-    }
+        // Debug: Check the newToken and gamer_id
+        //dd($newToken, $result->gamer_id);
 
-    public function verifyEmail($token)
-    {
-        $currentTime = Carbon::now(); // Use Carbon for working with date and time
+     // Redirect the user after signup to a "welcome" route, assuming it exists
+     return redirect()->route('update', ['gamer_id' => $result->gamer_id])
+     ->with('email', urlencode($result->email));
+ 
 
-        $verificationRecord = DB::table('verify')
-            ->where('token', $token)
-            ->first();
-
-        if ($verificationRecord && $verificationRecord->expiry_time >= $currentTime) {
-            // Generate a new token
-            $newToken = Str::random(16);
-
-            // Update the token in the database
-            DB::table('verify')
-                ->where('gamer_id', $verificationRecord->gamer_id)
-                ->update(['token' => $newToken]);
-
-            // Redirect to the signup page with necessary data
-            return redirect('/signup')
-                ->with('email', $verificationRecord->email)
-                ->with('gamer_id', $verificationRecord->gamer_id);
-        } else {
-            return redirect('/email_Verification');
-        }
+    } else {
+        return redirect('/');
     }
 }
 
+}

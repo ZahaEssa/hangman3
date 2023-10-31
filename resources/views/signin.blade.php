@@ -116,7 +116,8 @@
             </div>
             <h1>Login to your Hangman account</h1>
             <h3 class="text-center">Welcome back! Please sign-in to play</h3>
-            <form action="processes/signinprocess.php" method="POST" autocomplete="off">
+            <form method="POST" action="{{ route('signin') }}" autocomplete="off">
+                @csrf 
                 <div class="form-group">
                     <label for="username">Username</label>
                     <input type="text" class="form-control" id="username" name="gamer_username" placeholder="Username" required>
@@ -133,6 +134,6 @@
             <p class="text-bottom">Forgot your password? <a href="#">Reset Password</a></p>
         </div>
     </div>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>

@@ -91,7 +91,7 @@
                 <p class="text-center">
                 A verification email will be sent to your provided email address. Please click the verification link in the email to activate your account and complete the registration process.
             </p>
-                <form action="/send-verification-email" method="POST">
+                <form action="{{ route('send-email') }}" method="POST">
                     @csrf
                     <div class="form-group">
                         <label for="fullname">Full Name:</label>

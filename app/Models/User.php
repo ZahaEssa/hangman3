@@ -1,44 +1,26 @@
 <?php
+namespace App;
 
 namespace App\Models;
-
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
-use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+
 
 class User extends Authenticatable
-{
-    use HasApiTokens, HasFactory, Notifiable;
+{   use HasFactory;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<int, string>
-     */
+    protected $table = 'verify'; // The name of your users table in the database
+    public $timestamps = false;
+
+    protected $primaryKey = 'gamer_id'; 
     protected $fillable = [
-        'name',
-        'email',
-        'password',
+      'gamer_username','password','fullname'
+      
     ];
 
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var array<int, string>
-     */
     protected $hidden = [
-        'password',
-        'remember_token',
+        'password', // Hide the password attribute when converting the model to an array or JSON
     ];
 
-    /**
-     * The attributes that should be cast.
-     *
-     * @var array<string, string>
-     */
-    protected $casts = [
-        'email_verified_at' => 'datetime',
-    ];
 }
