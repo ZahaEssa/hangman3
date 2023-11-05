@@ -1,3 +1,5 @@
+
+
 var alphabet = "abcdefghijklmnopqrstuvwxyz".toUpperCase().split('');
 var alphabetDisplay = "";
 
@@ -29,6 +31,7 @@ function handleTimeout() {
   setTimeout(function () {
     displayNewWord();
   }, 3000);
+ 
 }
 
 function startTimer() {
@@ -51,8 +54,6 @@ function startTimer() {
   }, 1000);
 }
 
-
-
 function startGame(chosenLevel, chosenCategory) {
   hangmanGame.gameLevel = chosenLevel;
   hangmanGame.currentCategory = chosenCategory; // Set the chosen category
@@ -65,7 +66,6 @@ function startGame(chosenLevel, chosenCategory) {
   }
   gameStart();
 }
-
 
 for (var i = 0; i < alphabet.length; i++) {
   alphabetDisplay = alphabetDisplay + ' <button id="' + alphabet[i] + '" onclick=keyPressed("' + alphabet[i] + '");>' + alphabet[i] + "</button>";
@@ -122,8 +122,6 @@ function displayWord() {
   checkWin(wordDisplay);
 }
 
-
-
 function displayNewWord() {
   // Retrieve the selected category array
   const category = categories[hangmanGame.gameLevel][hangmanGame.currentCategory];
@@ -155,7 +153,6 @@ function displayNewWord() {
   startTimer(); // Start the timer for the new game
 }
 
-
 function displayScore() {
   wins.textContent = hangmanGame.numWins;
   winsPhone.textContent = hangmanGame.numWins;
@@ -183,43 +180,64 @@ function changeLevel(newLevel) {
 }
 
 // Set the base points based on the level
+
+  
 function startGame(chosenLevel, chosenCategory) {
   hangmanGame.gameLevel = chosenLevel;
   hangmanGame.currentCategory = chosenCategory;
 
   if (chosenLevel === "easy") {
     // Set parameters for the 'easy' level
-    if (chosenCategory === "Colors"&&chosenLevel === "easy") {
+    if (chosenCategory === "Animals"&&chosenLevel === "easy") {
+      hangmanGame.maxNumChances = 10;
+      hangmanGame.pointValue = 10;
+      hangmanGame.bonusPoints = 20;
+      timerDuration = 120; // Set a 30-second timer for the easy level
+  
+    } else if (chosenCategory === "Fruits"&&chosenLevel === "easy") {
       hangmanGame.maxNumChances = 10;
       hangmanGame.pointValue = 10;
       hangmanGame.bonusPoints = 20;
       timerDuration = 120; // Set a 30-second timer for the easy level
   
     } 
-    
     // Add more categories and their parameters as needed
 
     document.getElementById("level").style.color = "green";
   } else if (chosenLevel === "medium") {
     // Set parameters for the 'medium' level
-    if (chosenCategory === "Movies"&&chosenLevel === "medium") {
+    if (chosenCategory === "Capital_cities"&&chosenLevel === "medium") {
       document.getElementById("level").style.color = "gold";
       hangmanGame.maxNumChances = 8;
       hangmanGame.pointValue = 25;
       timerDuration = 180; // Set a 45-second timer for the medium level
   
-    } 
+    } else if (chosenCategory === "Colors"&&chosenLevel === "medium") {
+      document.getElementById("level").style.color = "gold";
+    hangmanGame.maxNumChances = 8;
+    hangmanGame.pointValue = 25;
+    timerDuration = 180; // Set a 45-second timer for the medium level
 
+    } 
 
     document.getElementById("level").style.color = "gold";
   }  else if (chosenLevel === "hard") {
     // Set parameters for the 'hard' level
-    if (chosenCategory === "FamousNovels" && chosenLevel === "hard") {
+    if (chosenCategory === "HistoricalFigures" && chosenLevel === "hard") {
+      hangmanGame.maxNumChances = 6;
+    hangmanGame.pointValue = 50;
+    timerDuration = 300; 
+  
+    }   else if (chosenCategory === "FamousNovels" && chosenLevel === "hard") {
       hangmanGame.maxNumChances = 6;
       hangmanGame.pointValue = 50;
       timerDuration = 300; 
     }
-    
+    else if (chosenCategory === "Scientists" && chosenLevel === "hard") {
+      hangmanGame.maxNumChances = 6;
+      hangmanGame.pointValue = 50;
+      timerDuration = 300; 
+    }
   
 
     document.getElementById("level").style.color = "red";
@@ -228,8 +246,8 @@ function startGame(chosenLevel, chosenCategory) {
   // Reset the game and start it
   resetGame();
   gameStart();
+  console.log("User ID: " + userId);
 }
-
 
 function resetGame() {
   alphabet = "abcdefghijklmnopqrstuvwxyz".toUpperCase().split('');
@@ -251,6 +269,8 @@ function resetGame() {
 function changeLevel(newLevel,newCategory) {
   if (checkChangeLevel()) {
     startGame(newLevel,newCategory);
+    
+
   }
 }
 
@@ -260,9 +280,69 @@ function restart() {
     startScreen.style.visibility = "visible";
   }
 }
+var isGamePaused = false;
+var savedRemainingTime = 0;
+var startTime;
+var timer;
+var timerDuration;
+      // Initialize the timer with the initial duration
+function initializeTimer(initialDuration) {
+timerDuration = initialDuration;
+startTime = Date.now();
+updateTimerDisplay(timerDuration);
 
+// Start the initial timer
+timer = setInterval(updateTimer, 1000);
+}
 
+function updateTimer() {
+var elapsedTime = Math.floor((Date.now() - startTime) / 1000);
+savedRemainingTime = timerDuration - elapsedTime;
+updateTimerDisplay(savedRemainingTime);
 
+if (savedRemainingTime <= 0) {
+  handleTimeout();
+  clearInterval(timer);
+}
+}
+
+function updateTimerDisplay(time) {
+var timerDisplay = document.getElementById("timerDisplay");
+timerDisplay.textContent = Math.round(time);
+}
+
+function pauseGame() {
+if (!isGamePaused) {
+  isGamePaused = true;
+  clearInterval(timer); // Pause the timer
+
+  // Calculate and store the remaining time accurately
+  var elapsedTime = Math.floor((Date.now() - startTime) / 1000);
+  savedRemainingTime = timerDuration - elapsedTime;
+
+  console.log("Game is paused. Saved remaining time: " + savedRemainingTime + " seconds");
+}
+}
+
+function resumeGame() {
+if (isGamePaused) {
+  isGamePaused = false;
+
+  // Update the start time to account for the pause duration
+  startTime = Date.now() - (timerDuration - savedRemainingTime) * 1000;
+
+  // Start a new timer with the updated remaining time
+  if (savedRemainingTime > 0) {
+    timer = setInterval(updateTimer, 1000);
+  } else {
+    handleTimeout(); // Player has lost immediately
+  }
+}
+}
+
+// Initialize the timer with the initial duration
+initializeTimer(60); // Replace 60 with your desired initial timer duration in seconds
+startTimer();
 
 
 
@@ -289,8 +369,6 @@ function resetCurrentLevel() {
 
 
 
-
-
 function checkWin(display) {
   var isWin = true;
 
@@ -303,6 +381,7 @@ function checkWin(display) {
       displayNewWord();
     }, 3000);
     clearInterval(timer);
+    updateGameResultsOnLoss(true);
     
   } 
 
@@ -342,6 +421,8 @@ function checkWin(display) {
       setTimeout(function () {
         displayNewWord();
       }, 3000);
+      
+      logAndStoreGameResult(userId, totalPoints,hangmanGame.gameLevel,hangmanGame.currentCategory);
     }
   }
   displayScore();
@@ -350,13 +431,10 @@ function checkWin(display) {
 
 
 
-
-
 function startNewGame() {
   resetCurrentLevel(); // Reset the current level
   displayNewWord(); // Start a new game
 }
-
 
 function gameStart() {
   startScreen.style.visibility = "hidden";
@@ -399,10 +477,23 @@ function restart() {
   }
 }
 
+
+
+
+
+
+
+var gameResults = {
+  gamesPlayed: 0,
+  gamesWon: 0,
+  scores: [],
+  state:null,
+};
+
+
 function help() {
   helpScreen.style.visibility = "visible";
 }
 
-function helpHide() {
-  helpScreen.style.visibility = "hidden";
-}
+
+
