@@ -287,8 +287,6 @@ for (var i = 0; i < alphabet.length; i++) {
 
 
 
-
-
   function startNewGame() {
     resetCurrentLevel(); // Reset the current level
     displayNewWord(); // Start a new game
