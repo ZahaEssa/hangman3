@@ -17,12 +17,25 @@
         <h1 class="mainTitle">Hangman</h1>
         <h2>Start Game - Pick a Category</h2>
         <div class="button-container">
-        <button onclick="startGame('easy', 'Animals');">Easy - Animals</button>
-        <button onclick="startGame('easy', 'Fruits');">Easy - Fruits</button>
-        <button onclick="startGame('medium', 'Capital_cities');">Medium - Capital Cities</button>
-        <button onclick="startGame('medium', 'Colors');">Medium - Colors</button>
-        <button onclick="startGame('hard');">Hard</button>
-       </div>
+  <div class="category easy">
+    <h2>Easy</h2>
+    <button onclick="startGame('easy', 'Animals');">Animals</button>
+    <button onclick="startGame('easy', 'Fruits');">Fruits</button>
+  </div>
+
+  <div class="category medium">
+    <h2>Medium</h2>
+    <button onclick="startGame('medium', 'Capital_cities');">Capital Cities</button>
+    <button onclick="startGame('medium', 'Colors');">Colors</button>
+  </div>
+
+  <div class="category hard">
+    <h2>Hard</h2>
+    <button onclick="startGame('hard', 'difficult');">Random Word</button>
+  </div>
+</div>
+
+
       </div>
     </div>
     <div id="helpScreen">
