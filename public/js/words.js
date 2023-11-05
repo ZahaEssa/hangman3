@@ -79,7 +79,6 @@ var categories = {
   "GIRAFFE",]
   },
 
-
   medium: {
   Capital_cities: [
   "LONDON",
@@ -213,13 +212,15 @@ var categories = {
   "AUBURN",
   "MAHOGANY",
   ]
-  }
-}
+  },
 
-const hard = {
-  getRandomWord: async function() {
-    const response = await fetch('https://random-word-api.herokuapp.com/word');
-    const data = await response.json();
-    return data[0]; // The API returns an array with one word, so we take the first element.
-  }
+  hard: {
+    difficult: []
+  },
+  
+  
+  
 };
+
+
+
