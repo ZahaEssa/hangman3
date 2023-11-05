@@ -20,9 +20,7 @@
         <button onclick="startGame('easy', 'Animals');">Easy - Animals</button>
         <button onclick="startGame('easy', 'Fruits');">Easy - Fruits</button>
         <button onclick="startGame('medium', 'Capital_cities');">Medium - Capital Cities</button>
-        <button onclick="startGame('medium', 'Colors');">Medium - Capital Cities</button>
-       
-
+        <button onclick="startGame('medium', 'Colors');">Medium - Colors</button>
        </div>
       </div>
     </div>
@@ -100,7 +98,10 @@
                 <p id="timerDisplay">30</p>
               </div>
               <div class="col-md-12">
-               
+                <div class="col-md-12">
+                    <li><a href="#" onclick="pauseGame();">Pause</a></li>
+                    <li><a href="#" onclick="resumeGame();">Resume</a></li>
+                  </div>
 
               </div>
             </div>
@@ -126,22 +127,17 @@
                       <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Category</a>
                         <ul class="dropdown-menu">
-                          <li id="easyGame"><a href="#" onclick="changeLevel('easy','Animals');">Easy-Animals</a></li>
-
-                          <li id="easyGame"><a href="#" onclick="changeLevel('easy','Fruits');">Easy-Fruits</a></li>
+                          <li id="easyGame"><a href="#" onclick="changeLevel('easy','Colors');">Easy-Colors</a></li>
 
 
-                          <li id="mediumGame"><a href="#" onclick="changeLevel('medium','Capital_cities');">Medium-Capital Cities</a></li>
-                          <li id="mediumGame"><a href="#" onclick="changeLevel('medium','Colors');">Medium- Colors</a></li>
+                          <li id="mediumGame"><a href="#" onclick="changeLevel('medium','Movies');">Medium-movies</a></li>
 
-                        
+                          <li id="hardGame"><a href="#" onclick="changeLevel('hard','FamousNovels');">Hard- famous novels</a></li>
 
                         </ul>
                       </li>
                       <li><a class="helpButton" href="#" onclick="help();">Help</a></li>
                       <li><a href="#" onclick="restart();">Restart</a></li>
-                      <li><a href="#" onclick="pauseGame();">Pause</a></li>
-                                    <li><a href="#" onclick="resumeGame(savedRemainingTime);">Resume</a></li
 
                       <li class="visible-sm visible-xs invisible-md invisible-lg invisible-xl"><p>Score: <span id="scorePhone">0</span></p></li>
                       <li class="visible-sm visible-xs invisible-md invisible-lg invisible-xl"><p>Wins: <span id="winsPhone">0</span></p></li>
@@ -177,8 +173,6 @@
     <script src="js/javascript.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
 
-    <script>
-
-    </script>
+    
   </body>
 </html>

@@ -285,64 +285,64 @@ var savedRemainingTime = 0;
 var startTime;
 var timer;
 var timerDuration;
-      // Initialize the timer with the initial duration
-function initializeTimer(initialDuration) {
-timerDuration = initialDuration;
-startTime = Date.now();
-updateTimerDisplay(timerDuration);
 
-// Start the initial timer
-timer = setInterval(updateTimer, 1000);
+// Initialize the timer with the initial duration
+function initializeTimer(initialDuration) {
+  timerDuration = initialDuration;
+  startTime = Date.now();
+  updateTimerDisplay(timerDuration);
+
+  // Start the initial timer
+  timer = setInterval(updateTimer, 1000);
 }
 
 function updateTimer() {
-var elapsedTime = Math.floor((Date.now() - startTime) / 1000);
-savedRemainingTime = timerDuration - elapsedTime;
-updateTimerDisplay(savedRemainingTime);
+  var elapsedTime = Math.floor((Date.now() - startTime) / 1000);
+  savedRemainingTime = timerDuration - elapsedTime;
+  updateTimerDisplay(savedRemainingTime);
 
-if (savedRemainingTime <= 0) {
-  handleTimeout();
-  clearInterval(timer);
-}
+  if (savedRemainingTime <= 0) {
+    handleTimeout();
+    clearInterval(timer);
+  }
 }
 
 function updateTimerDisplay(time) {
-var timerDisplay = document.getElementById("timerDisplay");
-timerDisplay.textContent = Math.round(time);
+  var timerDisplay = document.getElementById("timerDisplay");
+  timerDisplay.textContent = Math.round(time);
 }
 
 function pauseGame() {
-if (!isGamePaused) {
-  isGamePaused = true;
-  clearInterval(timer); // Pause the timer
+  if (!isGamePaused) {
+    isGamePaused = true;
+    clearInterval(timer); // Pause the timer
 
-  // Calculate and store the remaining time accurately
-  var elapsedTime = Math.floor((Date.now() - startTime) / 1000);
-  savedRemainingTime = timerDuration - elapsedTime;
+    // Calculate and store the remaining time accurately
+    var elapsedTime = Math.floor((Date.now() - startTime) / 1000);
+    savedRemainingTime = timerDuration - elapsedTime;
 
-  console.log("Game is paused. Saved remaining time: " + savedRemainingTime + " seconds");
-}
+    console.log("Game is paused. Saved remaining time: " + savedRemainingTime + " seconds");
+  }
 }
 
 function resumeGame() {
-if (isGamePaused) {
-  isGamePaused = false;
+  if (isGamePaused) {
+    isGamePaused = false;
 
-  // Update the start time to account for the pause duration
-  startTime = Date.now() - (timerDuration - savedRemainingTime) * 1000;
-
-  // Start a new timer with the updated remaining time
-  if (savedRemainingTime > 0) {
-    timer = setInterval(updateTimer, 1000);
-  } else {
-    handleTimeout(); // Player has lost immediately
+    // Update the start time to account for the pause duration
+    startTime = Date.now() - (timerDuration - savedRemainingTime) * 1000;
+    
+    // Start a new timer with the updated remaining time
+    if (savedRemainingTime > 0) {
+      timer = setInterval(updateTimer, 1000);
+    } else {
+      handleTimeout(); // Player has lost immediately
+    }
   }
-}
 }
 
 // Initialize the timer with the initial duration
 initializeTimer(60); // Replace 60 with your desired initial timer duration in seconds
-startTimer();
 
 
 
@@ -477,12 +477,6 @@ function restart() {
   }
 }
 
-
-
-
-
-
-
 var gameResults = {
   gamesPlayed: 0,
   gamesWon: 0,
@@ -491,9 +485,64 @@ var gameResults = {
 };
 
 
+// Add this function to update game results when a game is won
+
+
+
+
+
+
+
+
+
+
+
 function help() {
   helpScreen.style.visibility = "visible";
 }
+
+async function logAndStoreGameResult(userId, result,level,category) {
+  try {
+    // Log the game result
+    logger.info(`Game Result: User ID ${userId}, Result ${result}`);
+
+    // Make an HTTP request to your server to store the game result
+    const response = await fetch('http://localhost:3000/logGameResult', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ userId, result,level,category }),
+    });
+
+    if (response.ok) {
+      const data = await response.json();
+      console.log('Game result logged:', data.message);
+    } else {
+      console.error('Error logging game result:', response.status, response.statusText);
+    }
+  } catch (error) {
+    console.error('Error while logging/storing game result:', error);
+  }
+}
+
+function helpHide() {
+  helpScreen.style.visibility = "hidden";
+}
+
+// ... (your existing code)
+
+// Define the logAndStoreGameResult function
+
+var logger = {
+  info: function(message) {
+    console.log(message);
+  }
+};
+
+
+
+// ... (rest of your existing code)
 
 
 
