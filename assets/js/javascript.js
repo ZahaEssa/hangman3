@@ -213,6 +213,7 @@ for (var i = 0; i < alphabet.length; i++) {
     }
   }
 
+
   function resetCurrentLevel() {
     alphabet = "abcdefghijklmnopqrstuvwxyz".toUpperCase().split('');
     for (var i = 0; i < alphabet.length; i++) {
@@ -282,6 +283,11 @@ for (var i = 0; i < alphabet.length; i++) {
     }
     displayScore();
   }
+
+
+
+
+
 
   function startNewGame() {
     resetCurrentLevel(); // Reset the current level
