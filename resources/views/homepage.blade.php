@@ -21,6 +21,7 @@
         <button onclick="startGame('easy', 'Fruits');">Easy - Fruits</button>
         <button onclick="startGame('medium', 'Capital_cities');">Medium - Capital Cities</button>
         <button onclick="startGame('medium', 'Colors');">Medium - Colors</button>
+        <button onclick="startGame('hard');">Hard</button>
        </div>
       </div>
     </div>
@@ -99,8 +100,7 @@
               </div>
               <div class="col-md-12">
                 <div class="col-md-12">
-                    <li><a href="#" onclick="pauseGame();">Pause</a></li>
-                    <li><a href="#" onclick="resumeGame();">Resume</a></li>
+
                   </div>
 
               </div>
@@ -127,17 +127,22 @@
                       <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Category</a>
                         <ul class="dropdown-menu">
-                          <li id="easyGame"><a href="#" onclick="changeLevel('easy','Colors');">Easy-Colors</a></li>
+                          <li id="easyGame"><a href="#" onclick="changeLevel('easy','Animals');">Easy-Animals</a></li>
+                          <li id="easyGame"><a href="#" onclick="changeLevel('easy','Fruits');">Easy-Fruits</a></li
 
 
-                          <li id="mediumGame"><a href="#" onclick="changeLevel('medium','Movies');">Medium-movies</a></li>
+                          <li id="mediumGame"><a href="#" onclick="changeLevel('medium','Capital_cities');">Medium-Capital Cities</a></li>
+                          <li id="mediumGame"><a href="#" onclick="changeLevel('medium','Colors');">Medium-Colors</a></li>
 
                           <li id="hardGame"><a href="#" onclick="changeLevel('hard','FamousNovels');">Hard- famous novels</a></li>
 
                         </ul>
                       </li>
                       <li><a class="helpButton" href="#" onclick="help();">Help</a></li>
-                      <li><a href="#" onclick="restart();">Restart</a></li>
+
+                      <li><a href="#" onclick="pauseGame();">Pause</a></li>
+                    <li><a href="#" onclick="resumeGame();">Resume</a></li>
+                    <li><a href="#" onclick="restart();">Restart</a></li>
 
                       <li class="visible-sm visible-xs invisible-md invisible-lg invisible-xl"><p>Score: <span id="scorePhone">0</span></p></li>
                       <li class="visible-sm visible-xs invisible-md invisible-lg invisible-xl"><p>Wins: <span id="winsPhone">0</span></p></li>
@@ -172,7 +177,81 @@
     <script src="js/words.js"></script>
     <script src="js/javascript.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+    var isGamePaused = false;
+    var startTime;
+    var timer;
+    var timerDuration;
+    var savedRemainingTime = 0;
 
-    
+    // Initialize the timer with the initial duration
+    function initializeTimer(initialDuration) {
+      timerDuration = initialDuration;
+      updateTimerDisplay(timerDuration);
+      startTimer();
+    }
+
+    function startTimer() {
+      startTime = Date.now() - (savedRemainingTime * 1000);
+
+      // Clear the existing timer (if any)
+      if (timer) {
+        clearInterval(timer);
+      }
+
+      // Start a new timer
+      timer = setInterval(updateTimer, 1000);
+    }
+
+    function updateTimer() {
+      var elapsedTime = Math.floor((Date.now() - startTime) / 1000);
+      var remainingTime = timerDuration - elapsedTime;
+
+      // Ensure that remainingTime doesn't go below 0
+      if (remainingTime < 0) {
+        remainingTime = 0;
+      }
+
+      updateTimerDisplay(remainingTime);
+
+      if (remainingTime <= 0) {
+        handleTimeout();
+        clearInterval(timer);
+      }
+    }
+
+    function updateTimerDisplay(time) {
+      var timerDisplay = document.getElementById("timerDisplay");
+      timerDisplay.textContent = Math.round(time);
+    }
+
+    function pauseGame() {
+      if (!isGamePaused) {
+        isGamePaused = true;
+        clearInterval(timer); // Pause the timer
+        savedRemainingTime = timerDuration - Math.floor((Date.now() - startTime) / 1000);
+        console.log("Game is paused. Saved remaining time: " + savedRemainingTime + " seconds");
+      }
+    }
+
+    function resumeGame() {
+      if (isGamePaused) {
+        isGamePaused = false;
+
+        // Calculate the new start time based on the savedRemainingTime
+        startTime = Date.now() - (savedRemainingTime * 1000);
+
+        // Restart the timer with the saved remaining time
+        startTimer();
+      }
+    }
+
+    // Initialize the timer with the initial duration
+    initializeTimer(120); // Replace 60 with your desired initial timer duration in seconds
+
+
+
+    </script>
+
+
   </body>
 </html>
