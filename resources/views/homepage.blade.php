@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8">
     <title>Hangman</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous">
     </script>
@@ -21,7 +21,7 @@
         <button onclick="startGame('medium', 'Movies');">Medium - Movies</button>
         <button onclick="startGame('hard', 'FamousNovels');">Hard - Famous Novels</button>
 
-       </div> 
+       </div>
       </div>
     </div>
     <div id="helpScreen">
@@ -34,7 +34,7 @@
           <p>Medium Difficulty: Win: +25 points | Bonus points: If the word is guessed within 45 seconds, the bonus points awarded are 50 points and if answered any time after 45 seconds no bonus point is awarded | 8 Incorrect Guesses Allowed</p>
           <p>Hard Difficulty: Win: +50 points | Bonus points: If the word is guessed within 60 seconds, the bonus points awarded are 70 points and if answered any time after 60 seconds no bonus point is awarded | 6 Incorrect Guesses Allowed</p>
           <p>Restarting the Game will reset all stats</p>
-         
+
         </div>
       </div>
     </div>
@@ -95,7 +95,14 @@
                 <p>Time Left</p>
               </div>
               <div class="col-md-5 scoreboardScore">
-                <p id="timerDisplay">30</p> 
+                <p id="timerDisplay">30</p>
+              </div>
+              <div class="col-md-12">
+                <div class="col-md-12">
+                    <li><a href="#" onclick="pauseGame();">Pause</a></li>
+                    <li><a href="#" onclick="resumeGame();">Resume</a></li>
+                  </div>
+
               </div>
             </div>
           </div>
@@ -121,17 +128,17 @@
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Category</a>
                         <ul class="dropdown-menu">
                           <li id="easyGame"><a href="#" onclick="changeLevel('easy','Colors');">Easy-Colors</a></li>
-                      
-                         
+
+
                           <li id="mediumGame"><a href="#" onclick="changeLevel('medium','Movies');">Medium-movies</a></li>
-                        
+
                           <li id="hardGame"><a href="#" onclick="changeLevel('hard','FamousNovels');">Hard- famous novels</a></li>
-                   
+
                         </ul>
                       </li>
                       <li><a class="helpButton" href="#" onclick="help();">Help</a></li>
                       <li><a href="#" onclick="restart();">Restart</a></li>
-                    
+
                       <li class="visible-sm visible-xs invisible-md invisible-lg invisible-xl"><p>Score: <span id="scorePhone">0</span></p></li>
                       <li class="visible-sm visible-xs invisible-md invisible-lg invisible-xl"><p>Wins: <span id="winsPhone">0</span></p></li>
                       <li class="visible-sm visible-xs invisible-md invisible-lg invisible-xl"><p>Losses: <span id="lossesPhone">0</span></p></li>
@@ -166,6 +173,70 @@
     <script src="js/javascript.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
 
+    <script>
+    var isGamePaused = false;
+    var savedRemainingTime = 0;
+    var startTime;
+    var timer;
+    var timerDuration;
+          // Initialize the timer with the initial duration
+  function initializeTimer(initialDuration) {
+    timerDuration = initialDuration;
+    startTime = Date.now();
+    updateTimerDisplay(timerDuration);
 
+    // Start the initial timer
+    timer = setInterval(updateTimer, 1000);
+  }
+
+  function updateTimer() {
+    var elapsedTime = Math.floor((Date.now() - startTime) / 1000);
+    savedRemainingTime = timerDuration - elapsedTime;
+    updateTimerDisplay(savedRemainingTime);
+
+    if (savedRemainingTime <= 0) {
+      handleTimeout();
+      clearInterval(timer);
+    }
+  }
+
+  function updateTimerDisplay(time) {
+    var timerDisplay = document.getElementById("timerDisplay");
+    timerDisplay.textContent = Math.round(time);
+  }
+
+  function pauseGame() {
+    if (!isGamePaused) {
+      isGamePaused = true;
+      clearInterval(timer); // Pause the timer
+
+      // Calculate and store the remaining time accurately
+      var elapsedTime = Math.floor((Date.now() - startTime) / 1000);
+      savedRemainingTime = timerDuration - elapsedTime;
+
+      console.log("Game is paused. Saved remaining time: " + savedRemainingTime + " seconds");
+    }
+  }
+
+  function resumeGame() {
+    if (isGamePaused) {
+      isGamePaused = false;
+
+      // Update the start time to account for the pause duration
+      startTime = Date.now() - (timerDuration - savedRemainingTime) * 1000;
+
+      // Start a new timer with the updated remaining time
+      if (savedRemainingTime > 0) {
+        timer = setInterval(updateTimer, 1000);
+      } else {
+        handleTimeout(); // Player has lost immediately
+      }
+    }
+  }
+
+  // Initialize the timer with the initial duration
+  initializeTimer(60); // Replace 60 with your desired initial timer duration in seconds
+  startTimer();
+    </script>
   </body>
 </html>
