@@ -215,7 +215,7 @@ var categories = {
   },
 
   hard: {
-  Random: [
+  difficult: [
   "AIRPLANE",  
   "BACKPACK",  
   "BANJO",
