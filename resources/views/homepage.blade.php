@@ -13,8 +13,23 @@
   </head>
   <body>
     <div id="startScreen">
+
       <div class="container-fluid">
         <h1 class="mainTitle">Hangman</h1>
+
+        @if (session()->has('data'))
+        <h2 class="session-container">Hello, {{ session('data') }}</h2>
+    
+        @php
+        // Get the user ID from the session if it's stored there
+        $userId = session()->has('gamer_id') ? session('gamer_id') : null;
+        @endphp
+    @else
+        <div class="session-container">Guest</div>
+        @php
+        $userId = null; // In case the user is not logged in, you might not have a user ID.
+        @endphp
+    @endif
         <h2>Start Game - Pick a Category</h2>
         <div class="button-container">
   <div class="category easy">

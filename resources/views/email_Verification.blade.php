@@ -6,88 +6,8 @@
     <title>Email Verification</title>
    
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/email_Ver_css.css') }}">
     <style>
-      body {
-    font-family: 'Arial', sans-serif;
-    background: linear-gradient(45deg, #FFB6C1, #FFFFFF);
-    text-align: center;
-    color: #000;
-    margin: 0; 
-    overflow-x: hidden;
-}
-
-        h2 {
-            font-size: 36px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-            text-align: center;
-        }
-        .container,
-.card {
-    min-height: 9vh;
-}
-
-
-        .container {
-            background: rgba(0, 0, 0, 0.6);
-            border-radius: 15px;
-            padding: 20px;
-            max-width: 600px;
-            margin: 0 auto; 
-        }
-
-        .card {
-            border: 1px solid #000;
-            border-radius: 10px;
-            padding: 10px;
-        }
-
-
-
-        .image-blend {
-            mix-blend-mode: multiply; 
-            width: 200px;
-            height: auto;
-        }
-
-        .form-group {
-            margin-bottom: 20px;
-            text-align: left; 
-        }
-
-        .form-control {
-            border: 2px solid black;
-            border-radius: 5px;
-            font-size: 18px;
-            background: transparent;
-            color: #000;
-        }
-
-        .form-control::placeholder {
-            color: #ccc;
-        }
-
-        .btn-primary {
-            background: linear-gradient(to bottom, #FF5746, #FF6F61);
-            border: none;
-            border-radius: 5px;
-            padding: 15px 20px;
-            font-size: 20px;
-            color: white;
-        }
-
-        .btn-primary:hover {
-            background: linear-gradient(to bottom, #FF6F61, #FF5746);
-            color:black;
-        }
-
-        .form-group label {
-            font-weight: bold;
-        }
-
-        .text-center {
-            color: salmon;
-            font-size: 16px;
-        }
     </style>
 </head>
 <body>

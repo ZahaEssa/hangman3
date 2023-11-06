@@ -22,6 +22,18 @@ class SignInController extends Controller {
         if ($user) {
     
             if (password_verify($password, $user->password)) {
+                if (password_verify($password, $user->password)) {
+                    $request->session()->put('data', $user->fullname);
+                    $request->session()->put('gamer_id', $user->gamer_id);
+                    
+                    // Debugging: Display the 'fullname' and 'gamer_id' when successful
+                    //dd($request->session()->get('data')); // Debug the 'fullname'
+                    //dd($request->session()->get('gamer_id')); // Debug the 'gamer_id'
+                   
+                  
+                  
+                }
+                $request->session()->regenerate();
                 return redirect()->route('homepage');
                 exit;
               
