@@ -23,7 +23,7 @@
         }
         .container,
 .card {
-    min-height: 90vh;
+    min-height: 9vh;
 }
 
 
