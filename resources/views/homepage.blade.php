@@ -38,9 +38,9 @@
 
       </div>
     </div>
-    <div id="helpScreen">
+    <div id="helpScreen"style="visibility: hidden;>
       <div class="container">
-        <button onclick="helpHide();"></button>
+        <button onclick="helpHide();">Help</button>
         <div class="jumbotron">
           <h1>Rules of the game</h1>
           <p>Guess the word correctly by guessing the letters in the word. You only have a limited number of guesses before you lose the game.</p>
@@ -147,7 +147,7 @@
                           <li id="mediumGame"><a href="#" onclick="changeLevel('medium','Capital_cities');">Medium-Capital Cities</a></li>
                           <li id="mediumGame"><a href="#" onclick="changeLevel('medium','Colors');">Medium-Colors</a></li>
 
-                          <li id="hardGame"><a href="#" onclick="changeLevel('hard','FamousNovels');">Hard- famous novels</a></li>
+                          <li id="hardGame"><a href="#" onclick="changeLevel('hard','difficult');">Hard- Random word</a></li>
 
                         </ul>
                       </li>
