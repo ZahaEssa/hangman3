@@ -25,9 +25,7 @@
             font-style: italic;
             font-family: 'Arial', sans-serif;
         }
-        html, body {
-    height: 100%;
-}
+
 
 .container {
     display: flex;
