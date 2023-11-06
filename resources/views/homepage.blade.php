@@ -12,47 +12,47 @@
     <link href="https://fonts.googleapis.com/css?family=Inconsolata|Homemade+Apple" rel="stylesheet">
   </head>
   <body>
-    <div id="startScreen">
+  <div id="startScreen">
 
-      <div class="container-fluid">
-        <h1 class="mainTitle">Hangman</h1>
+<div class="container-fluid">
+    <h1 class="mainTitle">Hangman</h1>
 
-        @if (session()->has('data'))
+    @if (session()->has('data'))
         <h2 class="session-container">Hello, {{ session('data') }}</h2>
-    
         @php
-        // Get the user ID from the session if it's stored there
-        $userId = session()->has('gamer_id') ? session('gamer_id') : null;
+            // Get the user ID from the session if it's stored there
+            $userId = session()->has('gamer_id') ? session('gamer_id') : null;
         @endphp
-    @else
-        <div class="session-container">Guest</div>
-        @php
-        $userId = null; // In case the user is not logged in, you might not have a user ID.
-        @endphp
-    @endif
         <h2>Start Game - Pick a Category</h2>
         <div class="button-container">
-  <div class="category easy">
-    <h2>Easy</h2>
-    <button onclick="startGame('easy', 'Animals');">Animals</button>
-    <button onclick="startGame('easy', 'Fruits');">Fruits</button>
-  </div>
+            <div class="category easy">
+                <h2>Easy</h2>
+                <button onclick="startGame('easy', 'Animals');">Animals</button>
+                <button onclick="startGame('easy', 'Fruits');">Fruits</button>
+            </div>
 
-  <div class="category medium">
-    <h2>Medium</h2>
-    <button onclick="startGame('medium', 'Capital_cities');">Capital Cities</button>
-    <button onclick="startGame('medium', 'Colors');">Colors</button>
-  </div>
+            <div class="category medium">
+                <h2>Medium</h2>
+                <button onclick="startGame('medium', 'Capital_cities');">Capital Cities</button>
+                <button onclick="startGame('medium', 'Colors');">Colors</button>
+            </div>
 
-  <div class="category hard">
-    <h2>Hard</h2>
-    <button onclick="startGame('hard', 'difficult');">Random Word</button>
-  </div>
+            <div class="category hard">
+                <h2>Hard</h2>
+                <button onclick="startGame('hard', 'difficult');">Random Word</button>
+            </div>
+        </div>
+    @else
+        <div class="session-container">
+            <h2>You are not logged in. Please <a href="{{ route('signin') }}">sign in</a> to play Hangman.</h2>
+        </div>
+        @php
+            $userId = null;
+        @endphp
+    @endif
+</div>
 </div>
 
-
-      </div>
-    </div>
     <div id="helpScreen" style="visibility: hidden;">
       <div class="container">
         <button onclick="helpHide();">Help</button>
