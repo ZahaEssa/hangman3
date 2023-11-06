@@ -248,21 +248,68 @@
     }
   }
   
-  /* Define a container for the buttons */
   .button-container {
     display: flex;
-    justify-content: space-between;
     flex-wrap: wrap;
     max-width: 600px; /* Adjust the max-width as needed */
     margin: 0 auto;
   }
-  
-  /* Style the individual buttons within the container */
-  .button-container button {
-    width: 30%; /* Adjust the width to control the number of buttons in each row */
-    margin: 1%; /* Add some margin to separate the buttons */
+
+  .category {
+    width: calc(100% / 3); /* Divide the container into 3 columns for the 3 categories */
+    padding: 10px;
+  }
+
+  /* Style the individual buttons within the Easy category */
+  .category.easy button {
+    width: 100%;
+    margin: 10px 0; /* Add margin to separate buttons vertically */
     padding: 10px;
     font-size: 18px;
+    background-color: rgb(82, 82, 210); /* Add a background color */
+    color: #fff; /* Set text color to white */
+    border: none; /* Remove button border */
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+
+  .category.easy button:hover {
+    background-color: #0056b3; /* Change background color on hover */
+  }
+
+  /* Style the individual buttons within the Medium category */
+  .category.medium button {
+    width: 100%;
+    margin: 10px 0; /* Add margin to separate buttons vertically */
+    padding: 10px;
+    font-size: 18px;
+    background-color: #28a745; /* Add a background color */
+    color: #fff; /* Set text color to white */
+    border: none; /* Remove button border */
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+
+  .category.medium button:hover {
+    background-color: #1e7e34; /* Change background color on hover */
+  }
+
+  /* Style the individual buttons within the Hard category */
+  .category.hard button {
+    width: 100%;
+    margin: 10px 0; /* Add margin to separate buttons vertically */
+    padding: 10px;
+    font-size: 18px;
+    background-color: #dc3545; /* Add a background color */
+    color: #fff; /* Set text color to white */
+    border: none; /* Remove button border */
+    cursor: pointer;
+    transition: background-color 0.3s;
+    height:68%
+  }
+
+  .category.hard button:hover {
+    background-color: #a71d2a; /* Change background color on hover */
   }
   
   

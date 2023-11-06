@@ -223,21 +223,12 @@ function startGame(chosenLevel, chosenCategory) {
     document.getElementById("level").style.color = "gold";
   }  else if (chosenLevel === "hard") {
     // Set parameters for the 'hard' level
-    if (chosenCategory === "HistoricalFigures" && chosenLevel === "hard") {
+    if (chosenCategory === "difficult" && chosenLevel === "hard") {
       hangmanGame.maxNumChances = 6;
     hangmanGame.pointValue = 50;
     timerDuration = 300; 
   
-    }   else if (chosenCategory === "FamousNovels" && chosenLevel === "hard") {
-      hangmanGame.maxNumChances = 6;
-      hangmanGame.pointValue = 50;
-      timerDuration = 300; 
-    }
-    else if (chosenCategory === "Scientists" && chosenLevel === "hard") {
-      hangmanGame.maxNumChances = 6;
-      hangmanGame.pointValue = 50;
-      timerDuration = 300; 
-    }
+    }  
   
 
     document.getElementById("level").style.color = "red";
@@ -246,7 +237,7 @@ function startGame(chosenLevel, chosenCategory) {
   // Reset the game and start it
   resetGame();
   gameStart();
-  console.log("User ID: " + userId);
+  
 }
 
 function resetGame() {
@@ -264,6 +255,7 @@ function resetGame() {
   hangmanGame.mistakes = 0;
   document.getElementById("hangman").src = "images/" + hangmanGame.gameLevel + "/0.png";
   displayNewWord();
+  
 }
 
 function changeLevel(newLevel,newCategory) {
@@ -274,12 +266,7 @@ function changeLevel(newLevel,newCategory) {
   }
 }
 
-function restart() {
-  if (confirm("Are you sure you would like to restart the game? All stats will reset.")) {
-    resetGame();
-    startScreen.style.visibility = "visible";
-  }
-}
+
 var isGamePaused = false;
 var savedRemainingTime = 0;
 var startTime;
@@ -473,9 +460,10 @@ function restart() {
     lastLetterPhone.textContent = "-";
     hangmanGame.mistakes = 0;
     document.getElementById("hangman").src = "images/" + hangmanGame.gameLevel + "/0.png";
-    startScreen.style.visibility = "visible";
+    startGame(hangmanGame.gameLevel, hangmanGame.currentCategory);
   }
 }
+
 
 var gameResults = {
   gamesPlayed: 0,
@@ -497,9 +485,7 @@ var gameResults = {
 
 
 
-function help() {
-  helpScreen.style.visibility = "visible";
-}
+
 
 async function logAndStoreGameResult(userId, result,level,category) {
   try {
@@ -525,14 +511,26 @@ async function logAndStoreGameResult(userId, result,level,category) {
     console.error('Error while logging/storing game result:', error);
   }
 }
+function help() {
+  helpScreen.style.visibility = "visible";
+  if (!isGamePaused) {
+    // Pause the game
+    pauseGame();
+    isGamePaused = true;
+  }
+}
 
 function helpHide() {
   helpScreen.style.visibility = "hidden";
+  if (isGamePaused) {
+    // Resume the game
+    resumeGame();
+    isGamePaused = false;
+  }
 }
 
-// ... (your existing code)
 
-// Define the logAndStoreGameResult function
+
 
 var logger = {
   info: function(message) {
