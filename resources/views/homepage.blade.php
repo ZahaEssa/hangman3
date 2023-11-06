@@ -171,6 +171,7 @@
                       <li><a href="#" onclick="pauseGame();">Pause</a></li>
                     <li><a href="#" onclick="resumeGame();">Resume</a></li>
                     <li><a href="#" onclick="restart();">Restart</a></li>
+                    <li><a href="{{ route('progress') }}">View Progress</a>
 
                       <li class="visible-sm visible-xs invisible-md invisible-lg invisible-xl"><p>Score: <span id="scorePhone">0</span></p></li>
                       <li class="visible-sm visible-xs invisible-md invisible-lg invisible-xl"><p>Wins: <span id="winsPhone">0</span></p></li>
@@ -205,7 +206,11 @@
     <script src="js/words.js"></script>
     <script src="js/javascript.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
- 
+    <script>
+    // Pass the user ID to your JavaScript code
+    var userId = @json($userId); // This will convert the PHP variable to a JavaScript variable
+    console.log("User ID: " + userId);
+</script>
 
 
   </body>
