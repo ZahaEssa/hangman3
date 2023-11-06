@@ -329,12 +329,7 @@ function resumeGame() {
 }
 
 // Initialize the timer with the initial duration
-initializeTimer(60); // Replace 60 with your desired initial timer duration in seconds
-
-
-
-
-
+initializeTimer(60);
 
 function resetCurrentLevel() {
   alphabet = "abcdefghijklmnopqrstuvwxyz".toUpperCase().split('');
