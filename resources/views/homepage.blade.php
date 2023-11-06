@@ -38,7 +38,7 @@
 
       </div>
     </div>
-    <div id="helpScreen"style="visibility: hidden;>
+    <div id="helpScreen" style="visibility: hidden;">
       <div class="container">
         <button onclick="helpHide();">Help</button>
         <div class="jumbotron">
