@@ -42,7 +42,7 @@ Route::post('/signin', [SignInController::class, 'signIn']);
 Route::get('/homepage', [HomepageController::class, 'showHomepage'])->name('homepage');
 
 
-
+Route::get('/progress', [ProgressController::class, 'index'])->name('progress');
 
 
 
