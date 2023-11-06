@@ -8,16 +8,17 @@
  
     <style>
        
-        body {
-            background: linear-gradient(45deg, white);
-            color: #333;
-            font-family: 'Arial', sans-serif;
-            display: flex;
-            justify-content: center; 
-            align-items: center;
-            min-height: 100vh; 
-            margin: 0; 
-        }
+       body {
+    background: linear-gradient(45deg,  white, #FFB6C1);
+    color: #333;
+    font-family: 'Arial', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+}
+
 
         .container {
             text-align: center;

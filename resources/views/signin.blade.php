@@ -6,11 +6,12 @@
     <title>Login page</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
-        body {
+         body {
             font-family: Arial, sans-serif;
             background-size: cover;
             text-align: left;
             color: #000;
+            background: linear-gradient(45deg, #FFB6C1, white);
         }
 
         h1 {
@@ -24,16 +25,22 @@
             font-style: italic;
             font-family: 'Arial', sans-serif;
         }
+        html, body {
+    height: 100%;
+}
 
-        .container {
-            background: rgba(0, 0, 0, 0.6);
-            border: 1px solid #000;
-            border-radius: 10px;
-            padding: 15px;
-            margin: 0 auto;
-            max-width: 650px;
-            text-align: center;
-        }
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.6);
+    border: 1px solid #000;
+    border-radius: 10px;
+    padding: 15px;
+    max-width: 650px;
+    text-align: center;
+  
+}
 
         .card {
             border: 1px solid #000;

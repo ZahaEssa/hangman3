@@ -6,7 +6,7 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 use Illuminate\Support\Facades\Mail;
 
-use App\Models\User; // Assuming you have a User model
+use App\Models\User; 
 
 class EmailController extends Controller
 {

@@ -7,18 +7,25 @@
    
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
-        body {
-            font-family: 'Arial', sans-serif;
-            background-size: cover;
-            text-align: center;
-            color: #000; 
-        }
+      body {
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(45deg, #FFB6C1, #FFFFFF);
+    text-align: center;
+    color: #000;
+    margin: 0; 
+    overflow-x: hidden;
+}
 
         h2 {
             font-size: 36px;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
             text-align: center;
         }
+        .container,
+.card {
+    min-height: 9vh;
+}
+
 
         .container {
             background: rgba(0, 0, 0, 0.6);
@@ -31,7 +38,10 @@
         .card {
             border: 1px solid #000;
             border-radius: 10px;
+            padding: 10px;
         }
+
+
 
         .image-blend {
             mix-blend-mode: multiply; 
