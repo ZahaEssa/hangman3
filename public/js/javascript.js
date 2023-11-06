@@ -237,7 +237,7 @@ function startGame(chosenLevel, chosenCategory) {
   // Reset the game and start it
   resetGame();
   gameStart();
-  console.log("User ID: " + userId);
+  
 }
 
 function resetGame() {
@@ -266,13 +266,7 @@ function changeLevel(newLevel,newCategory) {
   }
 }
 
-function restart() {
-  if (confirm("Are you sure you would like to restart the game? All stats will reset.")) {
-    resetGame();
-    startGame(hangmanGame.gameLevel, hangmanGame.currentCategory);
-    
-  }
-}
+
 var isGamePaused = false;
 var savedRemainingTime = 0;
 var startTime;
@@ -466,9 +460,10 @@ function restart() {
     lastLetterPhone.textContent = "-";
     hangmanGame.mistakes = 0;
     document.getElementById("hangman").src = "images/" + hangmanGame.gameLevel + "/0.png";
-    startScreen.style.visibility = "visible";
+    startGame(hangmanGame.gameLevel, hangmanGame.currentCategory);
   }
 }
+
 
 var gameResults = {
   gamesPlayed: 0,
