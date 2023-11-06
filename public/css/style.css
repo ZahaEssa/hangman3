@@ -305,6 +305,7 @@
     border: none; /* Remove button border */
     cursor: pointer;
     transition: background-color 0.3s;
+    height:68%
   }
 
   .category.hard button:hover {
