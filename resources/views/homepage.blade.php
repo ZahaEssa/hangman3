@@ -210,6 +210,32 @@
     // Pass the user ID to your JavaScript code
     var userId = @json($userId); // This will convert the PHP variable to a JavaScript variable
     console.log("User ID: " + userId);
+    var pauseButton = document.getElementById("pauseButton");
+    var resumeButton = document.getElementById("resumeButton");
+    pauseButton.addEventListener("click", function () {
+  if (!isGamePaused) {
+    pauseGame(); // Pause the game
+    pauseButton.disabled = true; // Disable the "Pause" button
+    resumeButton.disabled = false; // Enable the "Resume" button
+  }
+});
+
+document.addEventListener("keyup", function (event) {
+  if (!isGamePaused) { // Check if the game is not paused
+    keyPressed(event.key.toUpperCase());
+  }
+});
+
+function keyPressed(press) {
+    if (!isGamePaused) { // Check if the game is not paused
+      if (alphabet.includes(press)) {
+        checkCurrentWord(press);
+        displayScore();
+        alphabet[alphabet.indexOf(press)] = 0;
+        lastLetter.textContent = press;
+      }
+    }
+  }
 </script>
 
 
