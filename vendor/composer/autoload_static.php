@@ -542,6 +542,7 @@ class ComposerStaticInit3f483800694e83e84b1aac69dea95bff
         'App\\Http\\Controllers\\EmailController' => __DIR__ . '/../..' . '/app/Http/Controllers/EmailController.php',
         'App\\Http\\Controllers\\EmailVerificationController' => __DIR__ . '/../..' . '/app/Http/Controllers/EmailVerificationController.php',
         'App\\Http\\Controllers\\HomepageController' => __DIR__ . '/../..' . '/app/Http/Controllers/HomepageController.php',
+        'App\\Http\\Controllers\\ProgressController' => __DIR__ . '/../..' . '/app/Http/Controllers/ProgressController.php',
         'App\\Http\\Controllers\\SignInController' => __DIR__ . '/../..' . '/app/Http/Controllers/SignInController.php',
         'App\\Http\\Controllers\\SignupController' => __DIR__ . '/../..' . '/app/Http/Controllers/SignupController.php',
         'App\\Http\\Controllers\\UserController' => __DIR__ . '/../..' . '/app/Http/Controllers/UserController.php',

@@ -12,6 +12,7 @@ return array(
     'App\\Http\\Controllers\\EmailController' => $baseDir . '/app/Http/Controllers/EmailController.php',
     'App\\Http\\Controllers\\EmailVerificationController' => $baseDir . '/app/Http/Controllers/EmailVerificationController.php',
     'App\\Http\\Controllers\\HomepageController' => $baseDir . '/app/Http/Controllers/HomepageController.php',
+    'App\\Http\\Controllers\\ProgressController' => $baseDir . '/app/Http/Controllers/ProgressController.php',
     'App\\Http\\Controllers\\SignInController' => $baseDir . '/app/Http/Controllers/SignInController.php',
     'App\\Http\\Controllers\\SignupController' => $baseDir . '/app/Http/Controllers/SignupController.php',
     'App\\Http\\Controllers\\UserController' => $baseDir . '/app/Http/Controllers/UserController.php',
