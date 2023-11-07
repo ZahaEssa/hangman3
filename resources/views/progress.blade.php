@@ -1,66 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<style>
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    margin: 20px 0;
-    font-family: Arial, sans-serif;
-    border-radius: 5px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
-  }
-
-  th, td {
-    border: 1px solid #e1e1e1;
-    padding: 10px;
-    text-align: center;
-  }
-
-  tr:nth-child(even) {
-    background-color: #f2f2f2;
-  }
-
-  th {
-    background-color: #4CAF50;
-    color: white;
-  }
-
-  tr:hover {
-    background-color: #ddd;
-  }
-
-  /* Additional styles for a more beautiful table */
-  th, td {
-    transition: background-color 0.3s, color 0.3s;
-  }
-
-  tr:hover td {
-    background-color: #ddd;
-  }
-
-  th {
-    text-transform: uppercase;
-  }
-
-  caption {
-    text-align: left;
-    font-weight: bold;
-    padding: 10px;
-    background-color: #4CAF50;
-    color: white;
-    border-radius: 5px 5px 0 0;
-  }
-
-  .session-container {
-    background-color:pink;
-    color: black;
-    text-align: center;
-    padding: 30px;
-    font-size:1.6em;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
-  }
-</style>
+<link rel="stylesheet" href="css/progress_css.css">
 </head>
 <body>
 @php
