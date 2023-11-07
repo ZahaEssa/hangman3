@@ -76,6 +76,10 @@ function resumeGame() {
 // Initialize the timer with the initial duration
 initializeTimer(60); // Replace 60 with your desired initial timer duration in seconds
 
+
+
+
+
 function startGame(chosenLevel, chosenCategory) {
   hangmanGame.gameLevel = chosenLevel;
   hangmanGame.currentCategory = chosenCategory; // Set the chosen category
@@ -94,18 +98,6 @@ for (var i = 0; i < alphabet.length; i++) {
   }
   document.getElementById("usedLetters").innerHTML = alphabetDisplay;
   alphabet = [];
-
-  document.onkeyup = function (event) {
-    keyPressed(event.key.toUpperCase());
-  }
-  function keyPressed(press) {
-    if (alphabet.includes(press)) {
-      checkCurrentWord(press);
-      displayScore();
-      alphabet[alphabet.indexOf(press)] = 0;
-      lastLetter.textContent = press;
-    }
-  }
   function checkCurrentWord(press) {
     var correct = false;
     for (var i = 0; i < hangmanGame.currentWordArray.length; i++) {
@@ -405,7 +397,5 @@ for (var i = 0; i < alphabet.length; i++) {
   function helpHide() {
     helpScreen.style.visibility = "hidden";
   }
-
-
 
 
