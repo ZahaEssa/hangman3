@@ -9,4 +9,5 @@ Please note that this link will expire within two hours. If you do not complete 
 If you encounter any issues or have questions, feel free to contact us.<br><br><br>
 
 Kind regards,
+<br>
 Hangman Game Admin
