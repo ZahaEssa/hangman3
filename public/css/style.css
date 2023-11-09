@@ -256,7 +256,7 @@
   }
 
   .category {
-    width: calc(100% / 3); /* Divide the container into 3 columns for the 3 categories */
+    width: calc(100% /4); /* Divide the container into 3 columns for the 3 categories */
     padding: 10px;
   }
 
@@ -312,5 +312,28 @@
     background-color: #a71d2a; /* Change background color on hover */
   }
   
+/* Style for the "Progress" link */
+.progress-link {
+  display: inline-block;
+  padding: 10px 20px;
+  font-size: 18px;
+  background-color:black;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  text-decoration: none;
+  margin-bottom: 10px;
+ 
+}
+
+.progress-link:hover {
+  background-color:lightsteelblue;
+  text-decoration: none;
+  color:black;
+}
+
+
   
   
