@@ -38,10 +38,12 @@ class EmailController extends Controller
 
         try {
             // Send the email using Laravel's Mail facade
-            Mail::send('email', $data, function ($message) use ($email, $name, $subject) {
+            if (Mail::send('email', $data, function ($message) use ($email, $name, $subject) {
                 $message->to($email, $name)->subject($subject);
-            });
-
+            })) {
+                return redirect('/');
+            }
+            
             return redirect()->back()->with('success', 'Email sent successfully.');
         } catch (Exception $e) {
             return redirect()->back()->with('error', 'Email could not be sent. Try again later.');
