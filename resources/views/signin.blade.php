@@ -6,8 +6,6 @@
     <title>Login page</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="{{ asset('css/signin_css.css') }}">
-
-
     <style>
     </style>
 </head>
@@ -19,6 +17,13 @@
             </div>
             <h1>Login to your Hangman account</h1>
             <h3 class="text-center">Welcome back! Please sign-in to play</h3>
+
+            @if(session('error'))
+                <div class="alert alert-danger">
+                    {{ session('error') }}
+                </div>
+            @endif
+
             <form method="POST" action="{{ route('signin') }}" autocomplete="off">
                 @csrf 
                 <div class="form-group">
