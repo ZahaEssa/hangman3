@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Validator;
 
 class EmailVerificationController extends Controller
 {
@@ -24,12 +24,17 @@ class EmailVerificationController extends Controller
                 ->where('gamer_id', $result->gamer_id)
                 ->update(['token' => $newToken]);
 
-            // Check if the new passwords match
-            $passwordMatch = $this->checkPasswordMatch($request->input('password'), $request->input('password_confirmation'));
-
-            if (!$passwordMatch) {
-                return redirect()->back()->with('error', 'Passwords do not match.');
+            // Validate password and confirm_password match
+            $validator = Validator::make($request->all(), [
+                'password' => 'sometimes|required|confirmed',
+            ]);
+            
+            if ($validator->fails()) {
+                return redirect()->route('update', ['gamer_id' => $result->gamer_id])
+                    ->withErrors($validator)
+                    ->with('email', urlencode($result->email));
             }
+            
 
             // Redirect the user after signup to a "welcome" route, assuming it exists
             return redirect()->route('update', ['gamer_id' => $result->gamer_id])
@@ -37,11 +42,5 @@ class EmailVerificationController extends Controller
         } else {
             return redirect('/');
         }
-    }
-
-    // Function to check if passwords match
-    private function checkPasswordMatch($password, $confirmPassword)
-    {
-        return $password === $confirmPassword;
     }
 }

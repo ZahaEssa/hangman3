@@ -30,14 +30,10 @@
                     </div>
                     <div class="card-body">
 
-                        @if(session('error'))
-                            <div class="alert alert-danger">
-                                {{ session('error') }}
-                            </div>
-                        @endif
+                      
 
                         <h4 class="text-center">You're almost there! Complete your registration to start playing!</h4>
-
+            
                         <form method="POST" action="{{ route('updateUser', ['gamer_id' => $gamer_id]) }}">
                             @csrf
 
@@ -48,10 +44,16 @@
                             <div class="form-group">
                                 <label for="password">Password</label>
                                 <input type="password" class="form-control" id="password" placeholder="Please enter your password" name="password" required>
+                                @error('password')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
                             </div>
                             <div class="form-group">
                                 <label for="confirmpass">Password Confirmation</label>
                                 <input type="password" class="form-control" id="confirmpass" placeholder="Please enter your password again" name="password_confirmation" required>
+                                @error('password_confirmation')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
                             </div>
 
                             <div class="form-group text-center">
