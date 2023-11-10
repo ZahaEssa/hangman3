@@ -24,24 +24,31 @@
             $userId = session()->has('gamer_id') ? session('gamer_id') : null;
         @endphp
         <h2>Start Game - Pick a Category</h2>
-        <div class="button-container">
-            <div class="category easy">
-                <h2>Easy</h2>
-                <button onclick="startGame('easy', 'Animals');">Animals</button>
-                <button onclick="startGame('easy', 'Fruits');">Fruits</button>
-            </div>
+<div class="button-container">
+    <div class="category easy">
+        <h2>Easy</h2>
+        <button onclick="startGame('easy', 'Animals');">Animals</button>
+        <button onclick="startGame('easy', 'Fruits');">Fruits</button>
+    </div>
 
-            <div class="category medium">
-                <h2>Medium</h2>
-                <button onclick="startGame('medium', 'Capital_cities');">Capital Cities</button>
-                <button onclick="startGame('medium', 'Colors');">Colors</button>
-            </div>
+    <div class="category medium">
+        <h2>Medium</h2>
+        <button onclick="startGame('medium', 'Capital_cities');">Capital Cities</button>
+        <button onclick="startGame('medium', 'Colors');">Colors</button>
+    </div>
 
-            <div class="category hard">
-                <h2>Hard</h2>
-                <button onclick="startGame('hard', 'difficult');">Random Word</button>
-            </div>
-        </div>
+    <div class="category hard">
+        <h2>Hard</h2>
+        <button onclick="startGame('hard', 'difficult');">Random Word</button>
+    </div>
+    <div class="category hard">
+        <h2>Progress</h2>
+        <a class="progress-link" href="{{ route('progress') }}">View Progress</a>
+    </div>
+   
+</div>
+
+
     @else
         <div class="session-container">
             <h2>You are not logged in. Please <a href="{{ route('signin') }}">sign in</a> to play Hangman.</h2>

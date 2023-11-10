@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string('token', 200);
             $table->datetime('expiry_time');
             $table->string('password', 200)->nullable();
-            $table->timestamps(); // Adds created_at and updated_at columns
+          
         });
     }
 
