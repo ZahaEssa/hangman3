@@ -4,17 +4,15 @@
 <head>
     <meta charset="UTF-8">
     <title>Signup Form</title>
-   
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
-   
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 
     <link href="https://fonts.googleapis.com/css2?family=Your+Selected+Font&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" type="text/css" href="{{ asset('css/signup_css.css') }}">
 
-    
     <style>
     </style>
 </head>
@@ -31,10 +29,17 @@
                         <h3>Already have an account? <a href="{{ route('signin') }}">Log in here</a>.<h3>
                     </div>
                     <div class="card-body">
-                    <h4 class="text-center">You're almost there! Complete your registration to start playing!</h4>
 
-                    <form method="POST" action="{{ route('updateUser', ['gamer_id' => $gamer_id]) }}">
-                        @csrf
+                        @if(session('error'))
+                            <div class="alert alert-danger">
+                                {{ session('error') }}
+                            </div>
+                        @endif
+
+                        <h4 class="text-center">You're almost there! Complete your registration to start playing!</h4>
+
+                        <form method="POST" action="{{ route('updateUser', ['gamer_id' => $gamer_id]) }}">
+                            @csrf
 
                             <div class="form-group">
                                 <label for="gamer_username">Username</label>
@@ -48,6 +53,7 @@
                                 <label for="confirmpass">Password Confirmation</label>
                                 <input type="password" class="form-control" id="confirmpass" placeholder="Please enter your password again" name="password_confirmation" required>
                             </div>
+
                             <div class="form-group text-center">
                                 <button type="submit" name="registrationBtn" class="btn btn-primary btn-block">Sign Up</button>
                             </div>
@@ -56,7 +62,7 @@
                             By clicking on the Sign Up button, you agree to our<br />
                             <a href="#">Terms and Conditions</a> and <a href="#">Policy And Privacy</a>
                         </p>
-                        
+
                     </div>
                 </div>
             </div>

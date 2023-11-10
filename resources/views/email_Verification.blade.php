@@ -21,6 +21,11 @@
                 <p class="text-center">
                 A verification email will be sent to your provided email address. Please click the verification link in the email to activate your account and complete the registration process.
             </p>
+            @if(session('error'))
+                            <div class="alert alert-danger">
+                                {{ session('error') }}
+                            </div>
+            @endif
                 <form action="{{ route('send-email') }}" method="POST">
                     @csrf
                     <div class="form-group">
