@@ -1,14 +1,15 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\RegistrationController;
-use App\Http\Controllers\EmailController;
-use App\Http\Controllers\EmailVerificationController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\EmailController;
+use App\Http\Controllers\LogoutController;
+use App\Http\Controllers\SignInController;
 use App\Http\Controllers\SessionController;
 use App\Http\Controllers\HomepageController;
-use App\Http\Controllers\SignInController;
 use App\Http\Controllers\ProgressController;
+use App\Http\Controllers\RegistrationController;
+use App\Http\Controllers\EmailVerificationController;
 
 
 Route::get('/', function () {
@@ -44,5 +45,5 @@ Route::get('/homepage', [HomepageController::class, 'showHomepage'])->name('home
 
 Route::get('/progress', [ProgressController::class, 'index'])->name('progress');
 
-
+Route::post('/logout', [LogoutController::class, 'logout'])->name('logout');
 
