@@ -48,9 +48,9 @@
    
 </div>
       {{-- logout --}}
-      <form method="POST" action="{{ route('logout') }}">
+      <form method="POST" action="{{ route('logout') }}"class="logout-form-homepage">
         @csrf
-        <button type="submit" class="btn btn-danger">Logout</button>
+        <button type="submit" >Logout</button>
       </form>
 
     @else
@@ -250,5 +250,5 @@ function keyPressed(press) {
 </script>
 
 
-  </body>
+  </body>
 </html>
