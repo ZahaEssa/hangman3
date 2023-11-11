@@ -95,15 +95,32 @@ function checkCurrentWord(press) {
       document.getElementById(press).style.textShadow = "0 0 1.5vh rgba(14,181,53,0.5)";
     }
   }
+
+  console.log('Checking before decrementing, Chances left:', hangmanGame.numChancesLeft);
+
   if (!correct) {
+    console.log('Mistake! Before decrementing, Chances left:', hangmanGame.numChancesLeft);
     hangmanGame.mistakes++;
     hangmanGame.numChancesLeft--;
+
+    console.log('Mistake! After decrementing, Chances left:', hangmanGame.numChancesLeft);
+
+    // Update the remaining chances in the UI
+    document.getElementById("chancesLeft").textContent = hangmanGame.numChancesLeft;
+    console.log('Updated Chances Left:', hangmanGame.numChancesLeft);
+
+    if (hangmanGame.numChancesLeft <= 0) {
+      console.log('No more chances left!');
+    }
+
     document.getElementById(press).style.textShadow = "0 0 1.5vh rgba(196,23,23,0.5)";
   }
+
   displayWord();
   document.getElementById(press).style.color = "transparent";
   document.getElementById("hangman").src = "images/" + hangmanGame.gameLevel + "/" + hangmanGame.mistakes + ".png";
 }
+
 
 function displayWord() {
   var wordDisplay = "<p>";
