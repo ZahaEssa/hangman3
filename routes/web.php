@@ -10,7 +10,7 @@ use App\Http\Controllers\HomepageController;
 use App\Http\Controllers\ProgressController;
 use App\Http\Controllers\RegistrationController;
 use App\Http\Controllers\EmailVerificationController;
-
+use App\Http\Controllers\serProgressGraphController;
 
 
 
@@ -54,3 +54,5 @@ Route::group(['middleware' => 'disable_back_btn'], function () {
     
     Route::post('/logout', [LogoutController::class, 'logout'])->name('logout');
     });
+
+    Route::get('/user-progress', [StatisticsController::class, 'getUserProgress'])->name('user-progress');
