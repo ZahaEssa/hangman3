@@ -14,8 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('verify', function (Blueprint $table) {
-            $table->id(); // Adds an "id" column as the primary key
-            $table->integer('gamer_id'); // Adds the "gamer_id" column
+            $table->id('gamer_id'); // This creates an auto-increment primary key column 'gamer_id'
             $table->string('fullname', 200);
             $table->string('gamer_username', 100)->nullable();
             $table->string('email', 200)->unique();
