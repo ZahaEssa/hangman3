@@ -334,6 +334,25 @@
   color:black;
 }
 
+.logout-form-homepage {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
 
+.logout-form-homepage button {
+  font-size: 12px; 
+  height: 10px; 
+  width: 80px; 
+  background-color:firebrick;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
   
-  
+}
+
+.logout-form-homepage button:hover {
+  background-color:darkred;
+}

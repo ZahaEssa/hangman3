@@ -25,7 +25,6 @@ class EmailController extends Controller
             return redirect()->back()->with('error', 'The email provided is invalid.');
         }
 
-        // Insert or update the user data into the database
         $user = User::updateOrInsert(
             ['email' => $email],
             ['fullname' => $name, 'token' => $token, 'expiry_time' => $expire]
@@ -33,15 +32,17 @@ class EmailController extends Controller
 
         $data = [
             'name' => $name,
-            'link' => $verificationUrl, // Use the $verificationUrl here
+            'link' => $verificationUrl, 
         ];
 
         try {
-            // Send the email using Laravel's Mail facade
-            Mail::send('email', $data, function ($message) use ($email, $name, $subject) {
+            // Send the email 
+            if (Mail::send('email', $data, function ($message) use ($email, $name, $subject) {
                 $message->to($email, $name)->subject($subject);
-            });
-
+            })) {
+                return redirect('/');
+            }
+            
             return redirect()->back()->with('success', 'Email sent successfully.');
         } catch (Exception $e) {
             return redirect()->back()->with('error', 'Email could not be sent. Try again later.');
