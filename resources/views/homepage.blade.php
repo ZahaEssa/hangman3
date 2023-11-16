@@ -107,13 +107,24 @@
               </div>
             </div>
             <div class="row">
-              <div class="col-md-6">
-                <p>Level</p>
-              </div>
-              <div class="col-md-5">
-                <p id="level"></p>
-              </div>
-            </div>
+    <div class="col-md-6">
+        <p>Level</p>
+    </div>
+    <div class="col-md-6">
+        <p id="level"></p>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6">
+        <p>Category</p>
+    </div>
+    <div class="col-md-6">
+        <p id="categoryValue"></p>
+    </div>
+</div>
+
+
+            
             <div class="row" style="margin-top: 20px;">
               <div class="col-md-6">
                 <p>Chances Left</p>
@@ -250,5 +261,5 @@ function keyPressed(press) {
 </script>
 
 
-  </body>
+  </body>
 </html>
