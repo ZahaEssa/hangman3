@@ -12,7 +12,7 @@ use App\Http\Controllers\RegistrationController;
 use App\Http\Controllers\EmailVerificationController;
 use App\Http\Controllers\UserProgressGraphController;
 use App\Http\Controllers\UserProgressChartController;
-
+use App\Http\Controllers\PlayerProgressController;
 
 
 
@@ -59,3 +59,5 @@ Route::group(['middleware' => 'disable_back_btn'], function () {
     Route::get('/progress_graph', [UserProgressGraphController::class, 'showPieChart'])->name('progress_graph');
 
     Route::get('/progress_chart', [UserProgressChartController::class, 'showBarChart'])->name('progress_chart');
+
+    Route::get('/player_progress', [PlayerProgressController::class, 'playerProgressChart'])->name('player_progress');
