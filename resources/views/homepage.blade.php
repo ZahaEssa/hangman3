@@ -33,7 +33,7 @@
 
     <div class="category medium">
         <h2>Medium</h2>
-        <button onclick="startGame('Medium', 'Capital_cities');">Capital Cities</button>
+        <button onclick="startGame('Medium', 'Capital_Cities');">Capital Cities</button>
         <button onclick="startGame('Medium', 'Colors');">Colors</button>
     </div>
 
@@ -170,7 +170,7 @@
                           <li id="easyGame"><a href="#" onclick="changeLevel('Easy','Fruits');">Easy-Fruits</a></li>
 
 
-                          <li id="mediumGame"><a href="#" onclick="changeLevel('Medium','Capital_cities');">Medium-Capital Cities</a></li>
+                          <li id="mediumGame"><a href="#" onclick="changeLevel('Medium','Capital_Cities');">Medium-Capital Cities</a></li>
                           <li id="mediumGame"><a href="#" onclick="changeLevel('Medium','Colors');">Medium-Colors</a></li>
 
                           <li id="hardGame"><a href="#" onclick="changeLevel('Hard','Difficult');">Hard- Random word</a></li>

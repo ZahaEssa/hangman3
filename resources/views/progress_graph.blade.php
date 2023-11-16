@@ -1,24 +1,15 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/chart.js/dist/Chart.min.css">
-    <script src="https://unpkg.com/htm12pdf.js/dist/htm12pdf.bundle.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js/dist/Chart.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js" defer></script>
+    <script src="https://d3js.org/d3.v6.min.js"></script> <!-- Include D3.js library -->
 
-    <title>Pie chart</title>
+    <title>Pie Chart</title>
     <style>
-        body {
-            margin: 0;
-            padding: 0;
-            background-color: lavender;
-            font-family: 'Arial', sans-serif;
-        }
-         /* Add navigation styles */
-         .navigation {
+     
+        .navigation {
             display: flex;
             justify-content: space-around;
             background-color: #333;
@@ -38,116 +29,168 @@
         .navigation a:hover {
             background-color: #555;
         }
+
+        #chart-container {
+            display: flex;
+            flex-direction: column; /* Stack items vertically */
+            align-items: center; /* Center items horizontally */
+            margin-top: 20px; /* Adjust the margin to create space between chart and legend */
+        }
+
+        #legend {
+            display: flex;
+            flex-direction: column; /* Stack items vertically */
+            align-items: center; /* Center items horizontally */
+            margin-bottom: 20px; /* Adjust the margin to create space between chart and legend */
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px; /* Add some space between legend items */
+        }
+
+        .legend-color {
+            width: 20px;
+            height: 20px;
+            margin-right: 8px;
+        }
+
+        #d3PieChart {
+            width: 400px;
+            height: 400px;
+        }
+
+        .tooltip {
+            position: absolute;
+            text-align: center;
+            padding: 8px;
+            font-size: 14px;
+            background-color: #f0f0f0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
     </style>
 </head>
 <body>
-     <!-- Add navigation section -->
-     <div class="navigation">
+    <div class="navigation">
         <a href="{{ route('progress') }}">Back to Progress</a>
         <a href="{{ route('progress_chart') }}">View Bar Chart</a>
     </div>
 
-    <!-- Canvas element for the pie chart with increased width and height -->
-    <canvas id="pieChart" width="600" height="500"></canvas>
+    <!-- Legend for the chart -->
+    <div id="legend"></div>
 
+    <!-- Container for the D3.js pie chart -->
+    <div id="chart-container">
+        <div id="d3PieChart"></div>
+    </div>
+
+    <!-- PHP Section -->
     <?php
-        use Illuminate\Support\Facades\DB; // Importing DB facade
+        use Illuminate\Support\Facades\DB; // Import the DB facade
 
-        // Fetching progress data using a raw SQL
+        // Fetch progress data using a raw SQL query
         $groupedResult = DB::select('SELECT level, category, SUM(score) as total_score FROM games WHERE level IS NOT NULL AND category IS NOT NULL GROUP BY level, category');
     ?>
 
-    <!-- Converting PHP data to JavaScript -->
+    <!-- Convert PHP data to JavaScript -->
     <script>
         var groupedData = <?php echo json_encode($groupedResult); ?>;
-        var labels = groupedData.map(item => item.level + ' - ' + item.category);
-        var data = groupedData.map(item => item.total_score);
+        
+        // Use D3.js to create the pie chart
+        var width = 400;
+        var height = 400;
+        var radius = Math.min(width, height) / 2;
 
-        var ctx = document.getElementById('pieChart').getContext('2d');
-        var myChart = new Chart(ctx, {
-            type: 'pie',
-            data: {
-                labels: labels,
-                datasets: [{
-                    label: 'Total Score',
-                    data: data,
-                    backgroundColor: [
-                    'rgba(255, 99, 132, 0.8)',
-                    'rgba(54, 162, 235, 0.8)',
-                    'rgba(255, 206, 86, 0.8)',
-                    'rgba(75, 192, 192, 0.8)',
-                    'rgba(153, 102, 255, 0.8)',
-                    'rgba(255, 159, 64, 0.8)',
-                    'rgba(120, 120, 120, 0.8)', // Add more colors as needed
-                    'rgba(200, 50, 200, 0.8)',
-                    'rgba(50, 200, 50, 0.8)',
-                ],
-                borderColor: [
-                    'rgba(255, 99, 132, 1)',
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(255, 206, 86, 1)',
-                    'rgba(75, 192, 192, 1)',
-                    'rgba(153, 102, 255, 1)',
-                    'rgba(255, 159, 64, 1)',
-                    'rgba(120, 120, 120, 1)', // Matching border colors
-                    'rgba(200, 50, 200, 1)',
-                    'rgba(50, 200, 50, 1)',
-                    ],
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                // aspectRatio: 1,
-                plugins: {
-                    legend: {
-                        position: 'right',
-                    },
-                },
-                animation: {
-                    animateRotate: true, // enabling rotation animation
-                    animateScale: true, // enabling scaling animation
-                    duration: 1500, // setting the animation duration in milliseconds
-                },
-                layout: {
-                    padding: {
-                        left: 20,
-                        right: 20,
-                        top: 20,
-                        bottom: 20,
-                    },
-                },
-            }
+        var color = d3.scaleOrdinal()
+            .range([
+                'rgba(255, 99, 132, 0.8)',
+                'rgba(255, 205, 86, 0.8)',
+                'rgba(54, 162, 235, 0.8)',
+                'rgba(75, 192, 192, 0.8)',
+                'rgba(153, 102, 255, 0.8)',
+                'rgba(255, 159, 64, 0.8)',
+            ]);
+
+        var arc = d3.arc()
+            .outerRadius(radius - 10)
+            .innerRadius(0);
+
+        var pie = d3.pie()
+            .sort(null)
+            .value(function(d) { return d.total_score; });
+
+        var svg = d3.select("#d3PieChart")
+            .append("svg")
+            .attr("width", width)
+            .attr("height", height)
+            .append("g")
+            .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
+
+        var data = groupedData.map(function(d) {
+            return {
+                level: d.level,
+                category: d.category,
+                total_score: +d.total_score
+            };
         });
-    </script>
 
-    <!-- JavaScript section -->
-    <script>
-        const exportChart = () => {
-            const chartE1 = document.getElementById('pieChart');
-            const image = chartE1.toDataURL('image/png', 1.0);
+        var g = svg.selectAll(".arc")
+            .data(pie(data))
+            .enter().append("g")
+            .attr("class", "arc");
 
-            const pdf = new jsPDF('landscape');
-            pdf.addImage(image, 'PNG', 5, 30, 300, 150);
-            pdf.save('chart.pdf');
-        }
-
-        const exportToExcel = () => {
-            const wb =XLSX.utils.book_new();
-            const wsData = [['Level - Category', 'Total Score']];
-
-            // adding data to worksheet
-            groupedData.forEach(item => {
-                wsData.push([item.level + ' - ' + item.category, item.total_score]);
+        g.append("path")
+            .attr("d", arc)
+            .style("fill", function(d) { return color(d.data.level + ' - ' + d.data.category); })
+            .on("mouseover", function(event, d) {
+                // Show tooltip with details on hover
+                tooltip.transition()
+                    .duration(200)
+                    .style("opacity", .9);
+                tooltip.html("Total Score: " + d.data.total_score)
+                    .style("left", (event.pageX) + "px")
+                    .style("top", (event.pageY - 28) + "px");
+            })
+            .on("mouseout", function(d) {
+                // Hide tooltip on mouseout
+                tooltip.transition()
+                    .duration(500)
+                    .style("opacity", 0);
+            })
+            .transition()  // Apply a transition for the animation effect
+            .duration(1000)
+            .attrTween("d", function(d) {
+                var i = d3.interpolate(d.startAngle, d.endAngle);
+                return function(t) {
+                    d.endAngle = i(t);
+                    return arc(d);
+                };
             });
 
-            const ws = XLSX.utils.aoa_to_sheet(wsData);
-            XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
+        // Legend
+        var legend = d3.select("#legend")
+            .selectAll(".legend-item")
+            .data(data)
+            .enter().append("div")
+            .attr("class", "legend-item");
 
-            // saving the workbook
-            XLSX.writeFile(wb, 'chart.xlsx');
-        }
+        legend.append("div")
+            .attr("class", "legend-color")
+            .style("background-color", function(d) { return color(d.level + ' - ' + d.category); });
+
+        legend.append("div")
+            .text(function(d) { return d.level + ' - ' + d.category; });
+
+        // Tooltip for hover details
+        var tooltip = d3.select("body").append("div")
+            .attr("class", "tooltip")
+            .style("opacity", 0);
     </script>
+
 </body>
 </html>
