@@ -80,7 +80,7 @@ var categories = {
   },
 
   Medium: {
-  Capital_cities: [
+  Capital_Cities: [
   "LONDON",
   "PARIS",
   "ROME",

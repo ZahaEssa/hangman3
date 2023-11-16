@@ -223,7 +223,7 @@ function startGame(chosenLevel, chosenCategory) {
     document.getElementById("level").style.color = "green";
   } else if (chosenLevel === "Medium") {
     // Set parameters for the 'medium' level
-    if (chosenCategory === "Capital_cities"&&chosenLevel === "Medium") {
+    if (chosenCategory === "Capital_Cities"&&chosenLevel === "Medium") {
       document.getElementById("level").style.color = "gold";
       hangmanGame.maxNumChances = 8;
       hangmanGame.pointValue = 25;
