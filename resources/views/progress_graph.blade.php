@@ -46,7 +46,7 @@
         <a href="{{ route('progress') }}">Back to Progress</a>
         <a href="{{ route('progress_chart') }}">View Bar Chart</a>
     </div>
-    
+
     <!-- Canvas element for the pie chart with increased width and height -->
     <canvas id="pieChart" width="600" height="500"></canvas>
 
@@ -99,7 +99,7 @@
             options: {
                 responsive: true,
                 maintainAspectRatio: false,
-                aspectRatio: 1,
+                // aspectRatio: 1,
                 plugins: {
                     legend: {
                         position: 'right',
