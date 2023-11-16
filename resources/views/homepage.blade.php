@@ -166,14 +166,14 @@
                       <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Category</a>
                         <ul class="dropdown-menu">
-                          <li id="easyGame"><a href="#" onclick="changeLevel('easy','Animals');">Easy-Animals</a></li>
-                          <li id="easyGame"><a href="#" onclick="changeLevel('easy','Fruits');">Easy-Fruits</a></li>
+                          <li id="easyGame"><a href="#" onclick="changeLevel('Easy','Animals');">Easy-Animals</a></li>
+                          <li id="easyGame"><a href="#" onclick="changeLevel('Easy','Fruits');">Easy-Fruits</a></li>
 
 
-                          <li id="mediumGame"><a href="#" onclick="changeLevel('medium','Capital_cities');">Medium-Capital Cities</a></li>
-                          <li id="mediumGame"><a href="#" onclick="changeLevel('medium','Colors');">Medium-Colors</a></li>
+                          <li id="mediumGame"><a href="#" onclick="changeLevel('Medium','Capital_cities');">Medium-Capital Cities</a></li>
+                          <li id="mediumGame"><a href="#" onclick="changeLevel('Medium','Colors');">Medium-Colors</a></li>
 
-                          <li id="hardGame"><a href="#" onclick="changeLevel('hard','difficult');">Hard- Random word</a></li>
+                          <li id="hardGame"><a href="#" onclick="changeLevel('Hard','Difficult');">Hard- Random word</a></li>
 
                         </ul>
                       </li>
