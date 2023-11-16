@@ -13,7 +13,7 @@
         <div class="navigation">
             <a href="{{ route('progress_graph') }}">View Pie Chart</a>
             <a href="{{ route('progress_chart') }}">View Bar Chart</a>
-            <a href="{{ route('player_progress') }}">View Progress Graph</a>
+           
         </div>
 
     @php

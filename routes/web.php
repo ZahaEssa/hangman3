@@ -60,4 +60,4 @@ Route::group(['middleware' => 'disable_back_btn'], function () {
 
     Route::get('/progress_chart', [UserProgressChartController::class, 'showBarChart'])->name('progress_chart');
 
-    Route::get('/player_progress', [PlayerProgressController::class, 'playerProgressChart'])->name('player_progress');
+    

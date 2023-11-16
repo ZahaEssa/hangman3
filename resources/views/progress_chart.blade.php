@@ -10,10 +10,13 @@
 
     <style>
         #chartContainer {
-            display: flex;
-            justify-content: center;
-            align-items: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0 auto; /* Add this line to center the container horizontally */
         }
+        
         /* Add navigation styles */
         .navigation {
             display: flex;
@@ -57,88 +60,52 @@
     <div id="chartContainer" style="width: 500px; height: 500px;"></div>
 
     <script>
-        var groupedData = <?php echo json_encode($groupedResult); ?>;
-        var labels = groupedData.map(item => item.level + ' - ' + item.category);
-        var data = groupedData.map(item => item.total_score);
+    var groupedData = <?php echo json_encode($groupedResult); ?>;
+    var labels = groupedData.map(item => item.level + ' - ' + item.category);
+    var data = groupedData.map(item => item.total_score);
 
-        // Create a canvas element for rendering the chart
-        var canvas = document.createElement('canvas');
-        canvas.width = 500;
-        canvas.height = 500;
-        document.getElementById('chartContainer').appendChild(canvas);
+    // Create a canvas element for rendering the chart
+    var canvas = document.createElement('canvas');
+    canvas.width = 500;
+    canvas.height = 500;
+    document.getElementById('chartContainer').appendChild(canvas);
 
-        var ctx = canvas.getContext('2d');
-        var myChart = new Chart(ctx, {
-            type: 'bar',
-            data: {
-                labels: labels,
-                datasets: [{
-                    label: 'Total Score',
-                    data: data,
-                    backgroundColor: [
-                        'rgba(255, 99, 132, 0.8)',
-                        'rgba(255, 205, 86, 0.8)',
-                        'rgba(54, 162, 235, 0.8)',
-                        'rgba(75, 192, 192, 0.8)',
-                        'rgba(153, 102, 255, 0.8)',
-                        'rgba(255, 159, 64, 0.8)',
-                    ],
-                    borderColor: [
-                        'rgba(255, 99, 132, 1)',
-                        'rgba(255, 205, 86, 1)',
-                        'rgba(54, 162, 235, 1)',
-                        'rgba(75, 192, 192, 1)',
-                        'rgba(153, 102, 255, 1)',
-                        'rgba(255, 159, 64, 1)',
-                    ],
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                scales: {
-                    y: {
-                        beginAtZero: true
-                    }
-                },
-                responsive: true,
-                maintainAspectRatio: false,
-                animation: {
-                    onComplete: function(animation) {
-                        // Animation completed, handle any post-animation tasks here
-                    },
-                    onProgress: function(animation) {
-                        // Animation in progress, handle any progress-related tasks here
-                    },
-                    easing: 'easeInOutCubic', // Set the easing function for the animation
-                    duration: 2000 // Set the duration of the animation in milliseconds
+    var ctx = canvas.getContext('2d');
+    var myChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: 'Total Score',
+                data: data,
+                backgroundColor: 'rgba(75, 192, 192, 0.8)', // Set a single background color for all bars
+                borderColor: 'rgba(75, 192, 192, 1)', // Border color for the bars
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
                 }
+            },
+            responsive: true,
+            maintainAspectRatio: false,
+            animation: {
+                onComplete: function(animation) {
+                    // Animation completed, handle any post-animation tasks here
+                },
+                onProgress: function(animation) {
+                    // Animation in progress, handle any progress-related tasks here
+                },
+                easing: 'easeInOutCubic', // Set the easing function for the animation
+                duration: 2000 // Set the duration of the animation in milliseconds
             }
-        });
-
-        // Function to export chart to PDF
-        function exportToPDF() {
-            // Get the base64 image data from the chart
-            var chartImage = canvas.toDataURL('image/png');
-
-            // Create a new canvas to hold the image
-            var exportCanvas = document.createElement('canvas');
-            exportCanvas.width = 500;
-            exportCanvas.height = 500;
-            var exportCtx = exportCanvas.getContext('2d');
-
-            // Create an image element and set its source to the chart image
-            var img = new Image();
-            img.onload = function() {
-                // Draw the image onto the export canvas
-                exportCtx.drawImage(img, 0, 0, 500, 500);
-
-                // Use html2pdf to export the new canvas
-                var pdf = new html2pdf(exportCanvas, { margin: 10, filename: 'chart.pdf' });
-                pdf.save();
-            };
-
-            img.src = chartImage;
         }
-    </script>
+    });
+
+   
+</script>
+
 </body>
 </html>
