@@ -8,6 +8,13 @@
     <title>User Progress</title>
 </head>
 <body>
+
+    {{-- Add navigation section --}}
+        <div class="navigation">
+            <a href="{{ route('progress_graph') }}">View Pie Chart</a>
+            <a href="{{ route('progress_chart') }}">View Bar Chart</a>
+        </div>
+
     @php
     use Illuminate\Support\Facades\Session;
     use Illuminate\Support\Facades\DB;
@@ -22,8 +29,8 @@
         @php $userId = Session::get('gamer_id'); @endphp
 
         {{-- Display a link to redirect to the chart page --}}
-        <div><a href="{{ route('progress_chart') }}">View Chart</a></div>
-
+       
+       
         {{-- Display a greeting --}}
         <div class="session-container">Hello, {{ $username }}</div>
 
@@ -67,5 +74,8 @@
         <p>Guest</p>
         @php $userId = null; // In case the user is not logged in, you might not have a user ID. @endphp
     @endif
+
+    
+
 </body>
 </html>
