@@ -196,65 +196,62 @@ function changeLevel(newLevel) {
   }
 }
 
-// Set the base points based on the level
-
-  
 function startGame(chosenLevel, chosenCategory) {
   hangmanGame.gameLevel = chosenLevel;
   hangmanGame.currentCategory = chosenCategory;
 
   if (chosenLevel === "Easy") {
     // Set parameters for the 'easy' level
-    if (chosenCategory === "Animals"&&chosenLevel === "Easy") {
+    if (chosenCategory === "Animals" && chosenLevel === "Easy") {
       hangmanGame.maxNumChances = 10;
       hangmanGame.pointValue = 10;
       hangmanGame.bonusPoints = 20;
       timerDuration = 120; // Set a 30-second timer for the easy level
-  
-    } else if (chosenCategory === "Fruits"&&chosenLevel === "Easy") {
+    } else if (chosenCategory === "Fruits" && chosenLevel === "Easy") {
       hangmanGame.maxNumChances = 10;
       hangmanGame.pointValue = 10;
       hangmanGame.bonusPoints = 20;
       timerDuration = 120; // Set a 30-second timer for the easy level
-  
-    } 
+    }
     // Add more categories and their parameters as needed
 
+    // Set color for both Level and Category
     document.getElementById("level").style.color = "green";
+    document.getElementById("categoryValue").style.color = "green";
   } else if (chosenLevel === "Medium") {
     // Set parameters for the 'medium' level
-    if (chosenCategory === "Capital_Cities"&&chosenLevel === "Medium") {
+    if (chosenCategory === "Capital_Cities" && chosenLevel === "Medium") {
       document.getElementById("level").style.color = "gold";
+      document.getElementById("categoryValue").style.color = "gold";
       hangmanGame.maxNumChances = 8;
       hangmanGame.pointValue = 25;
       timerDuration = 180; // Set a 45-second timer for the medium level
-  
-    } else if (chosenCategory === "Colors"&&chosenLevel === "Medium") {
+    } else if (chosenCategory === "Colors" && chosenLevel === "Medium") {
       document.getElementById("level").style.color = "gold";
-    hangmanGame.maxNumChances = 8;
-    hangmanGame.pointValue = 25;
-    timerDuration = 180; // Set a 45-second timer for the medium level
-
-    } 
-
-    document.getElementById("level").style.color = "gold";
-  }  else if (chosenLevel === "Hard") {
+      document.getElementById("categoryValue").style.color = "gold";
+      hangmanGame.maxNumChances = 8;
+      hangmanGame.pointValue = 25;
+      timerDuration = 180; // Set a 45-second timer for the medium level
+    }
+  } else if (chosenLevel === "Hard") {
     // Set parameters for the 'hard' level
     if (chosenCategory === "Difficult" && chosenLevel === "Hard") {
       hangmanGame.maxNumChances = 6;
-    hangmanGame.pointValue = 50;
-    timerDuration = 300; 
-  
-    }  
-  
+      hangmanGame.pointValue = 50;
+      timerDuration = 300;
+    }
 
+    // Set color for both Level and Category
     document.getElementById("level").style.color = "red";
+    document.getElementById("categoryValue").style.color = "red";
   }
+
+  // Display the selected category in the dashboard for all levels
+  document.getElementById("categoryValue").textContent = chosenCategory;
 
   // Reset the game and start it
   resetGame();
   gameStart();
-  
 }
 
 function resetGame() {
