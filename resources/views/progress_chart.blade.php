@@ -1,23 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/progress_css.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.js"></script>
+
     <title>Progress Chart</title>
 
     <style>
         #chartContainer {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
-        margin: 0 auto; /* Add this line to center the container horizontally */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0 auto;
         }
-        
-        /* Add navigation styles */
+
+        #chartWrapper {
+    position: relative;
+    width: 500px;
+    height: 500px;
+}
+
+#username {
+    position: relative;
+    
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    width: 100%;
+    white-space: nowrap; /* Ensures the text stays on one line */
+}
+
+
+
         .navigation {
             display: flex;
             justify-content: space-around;
@@ -38,75 +57,107 @@
         .navigation a:hover {
             background-color: #555;
         }
+
+        .login-message {
+            background-color: #f8d7da; /* Light red background color */
+            color: #721c24; /* Dark red text color */
+            padding: 15px; /* Padding around the message */
+            border: 1px solid #f5c6cb; /* Border color */
+            border-radius: 5px; /* Rounded corners */
+            margin-top: 20px; /* Top margin */
+            text-align: center; /* Center text */
+        }
+
+        .login-link {
+            color: #721c24; /* Dark red text color for the link */
+            font-weight: bold; /* Bold text for the link */
+            text-decoration: underline; /* Underline for the link */
+        }
     </style>
 </head>
-<body>
 
- <!-- Add navigation section -->
- <div class="navigation">
+<body>
+<?php
+    use Illuminate\Support\Facades\Session;
+    use Illuminate\Support\Facades\DB;
+    ?>
+
+
+
+    <div class="navigation">
         <a href="{{ route('progress') }}">Back to Progress</a>
         <a href="{{ route('progress_graph') }}">View Pie Chart</a>
         <a href="{{ route('player_progress') }}">View Line Chart</a>
     </div>
 
+    @if(Session::has('data'))
     <?php
-    // Assuming you are using Laravel or a similar framework
-    use Illuminate\Support\Facades\DB;
+        $username = Session::get('data');
+        $userId = Session::get('gamer_id');
 
-    // Fetch progress data using a raw SQL query
-    $groupedResult = DB::select('SELECT level, category, SUM(score) as total_score FROM games WHERE level IS NOT NULL AND category IS NOT NULL GROUP BY level, category');
+        if($userId !== null) {
+            $groupedResult = DB::select('SELECT level, category, SUM(score) as total_score FROM games WHERE player_id = ? GROUP BY level, category', [$userId]);
     ?>
+            
 
-    <!-- Placeholder for the chart image -->
-    <div id="chartContainer" style="width: 500px; height: 500px;"></div>
+            <div id="chartContainer">
+                <div id="chartWrapper">
+                    <h1 id="username"></h1>
+                    <canvas id="myChart" width="500" height="500"></canvas>
+                </div>
+            </div>
 
-    <script>
-    var groupedData = <?php echo json_encode($groupedResult); ?>;
-    var labels = groupedData.map(item => item.level + ' - ' + item.category);
-    var data = groupedData.map(item => item.total_score);
+            <script>
+                var groupedData = <?php echo json_encode($groupedResult); ?>;
+                var username = "<?php echo $username; ?>";
+                var labels = groupedData.map(item => item.level + ' - ' + item.category);
+                var data = groupedData.map(item => item.total_score);
 
-    // Create a canvas element for rendering the chart
-    var canvas = document.createElement('canvas');
-    canvas.width = 500;
-    canvas.height = 500;
-    document.getElementById('chartContainer').appendChild(canvas);
+                document.getElementById('username').innerText = username + "'s Progress Chart";
 
-    var ctx = canvas.getContext('2d');
-    var myChart = new Chart(ctx, {
-        type: 'bar',
-        data: {
-            labels: labels,
-            datasets: [{
-                label: 'Total Score',
-                data: data,
-                backgroundColor: 'rgba(75, 192, 192, 0.8)', // Set a single background color for all bars
-                borderColor: 'rgba(75, 192, 192, 1)', // Border color for the bars
-                borderWidth: 1
-            }]
-        },
-        options: {
-            scales: {
-                y: {
-                    beginAtZero: true
-                }
-            },
-            responsive: true,
-            maintainAspectRatio: false,
-            animation: {
-                onComplete: function(animation) {
-                    // Animation completed, handle any post-animation tasks here
-                },
-                onProgress: function(animation) {
-                    // Animation in progress, handle any progress-related tasks here
-                },
-                easing: 'easeInOutCubic', // Set the easing function for the animation
-                duration: 2000 // Set the duration of the animation in milliseconds
-            }
+                var ctx = document.getElementById('myChart').getContext('2d');
+                var myChart = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: labels,
+                        datasets: [{
+                            label: 'Total Score',
+                            data: data,
+                            backgroundColor: 'rgba(75, 192, 192, 0.8)',
+                            borderColor: 'rgba(75, 192, 192, 1)',
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        scales: {
+                            y: {
+                                beginAtZero: true
+                            }
+                        },
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        animation: {
+                            onComplete: function (animation) {
+                                // Animation completed, handle any post-animation tasks here
+                            },
+                            onProgress: function (animation) {
+                                // Animation in progress, handle any progress-related tasks here
+                            },
+                            easing: 'easeInOutCubic',
+                            duration: 2000
+                        }
+                    }
+                });
+
+            </script>
+    <?php
+        } else {
+            echo "<p>No results found for this user.</p>";
         }
-    });
-
-   
-</script>
-
+    ?>
+    @else
+        <div class="login-message">You are not logged in. Please <a href="{{ route('signin') }}">sign in</a> to view your progress.</div>
+    @endif
 </body>
+
 </html>
