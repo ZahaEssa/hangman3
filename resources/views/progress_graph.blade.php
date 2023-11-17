@@ -88,6 +88,15 @@
             font-weight: bold; /* Bold text for the link */
             text-decoration: underline; /* Underline for the link */
         }
+        #username {
+            text-align: center;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            margin-top: auto; 
+            margin-bottom: 20px; 
+            font-size: 30px; 
+        }
     </style>
 </head>
 

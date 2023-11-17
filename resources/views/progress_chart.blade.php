@@ -20,20 +20,21 @@
         }
 
         #chartWrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     position: relative;
     width: 500px;
     height: 500px;
 }
 
 #username {
-    position: relative;
-    
-    left: 50%;
-    transform: translate(-50%, -50%);
     text-align: center;
-    width: 100%;
     white-space: nowrap; /* Ensures the text stays on one line */
+    margin-top: 20px; /* Add margin to separate the username from the chart */
 }
+
 
 
 
@@ -98,7 +99,7 @@
         if($userId !== null) {
             $groupedResult = DB::select('SELECT level, category, SUM(score) as total_score FROM games WHERE player_id = ? GROUP BY level, category', [$userId]);
     ?>
-            
+           
 
             <div id="chartContainer">
                 <div id="chartWrapper">
@@ -149,6 +150,7 @@
                     }
                 });
 
+                
             </script>
     <?php
         } else {
