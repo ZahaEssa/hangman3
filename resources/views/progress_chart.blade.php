@@ -4,77 +4,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/progress_css.css">
+    <link rel="stylesheet" href="css/chart.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.js"></script>
 
     <title>Progress Chart</title>
 
-    <style>
-        #chartContainer {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0 auto;
-        }
-
-        #chartWrapper {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-    width: 500px;
-    height: 500px;
-}
-
-#username {
-    text-align: center;
-    white-space: nowrap; /* Ensures the text stays on one line */
-    margin-top: 20px; /* Add margin to separate the username from the chart */
-}
-
-
-
-
-        .navigation {
-            display: flex;
-            justify-content: space-around;
-            background-color: #333;
-            padding: 10px;
-            margin-bottom: 20px;
-        }
-
-        .navigation a {
-            color: white;
-            text-decoration: none;
-            font-size: 1.2em;
-            padding: 8px;
-            border-radius: 5px;
-            transition: background-color 0.3s;
-        }
-
-        .navigation a:hover {
-            background-color: #555;
-        }
-
-        .login-message {
-            background-color: #f8d7da; /* Light red background color */
-            color: #721c24; /* Dark red text color */
-            padding: 15px; /* Padding around the message */
-            border: 1px solid #f5c6cb; /* Border color */
-            border-radius: 5px; /* Rounded corners */
-            margin-top: 20px; /* Top margin */
-            text-align: center; /* Center text */
-        }
-
-        .login-link {
-            color: #721c24; /* Dark red text color for the link */
-            font-weight: bold; /* Bold text for the link */
-            text-decoration: underline; /* Underline for the link */
-        }
-    </style>
+    
 </head>
 
 <body>

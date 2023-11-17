@@ -4,74 +4,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/line.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <!-- Include html2pdf library -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.js"></script>
     <title>User Progress</title>
-    <style>
-        body {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            height: 100vh; /* Set to the desired height of the chart container */
-            box-sizing: border-box;
-
-        }
-
-        .navigation {
-            display: flex;
-            justify-content: space-around;
-            background-color: #333;
-            padding: 10px;
-            margin-bottom: 20px;
-            width: 100%;
-            box-sizing: border-box;
-        }
-
-        .navigation a {
-            color: white;
-            text-decoration: none;
-            font-size: 1.2em;
-            padding: 8px;
-            border-radius: 5px;
-            transition: background-color 0.3s;
-        }
-
-        .navigation a:hover {
-            background-color: #555;
-        }
-
-        #chartContainer {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0 auto;
-        }
-        .login-message {
-        background-color: #f8d7da; /* Light red background color */
-        color: #721c24; /* Dark red text color */
-        padding: 15px; /* Padding around the message */
-        border: 1px solid #f5c6cb; /* Border color */
-        border-radius: 5px; /* Rounded corners */
-        margin-top: 20px; /* Top margin */
-        text-align: center; /* Center text */
-        width:100%;
-        box-sizing: border-box;
-    }
-
-    .login-link {
-        color: #721c24; /* Dark red text color for the link */
-        font-weight: bold; /* Bold text for the link */
-        text-decoration: underline; /* Underline for the link */
-    }
-
-        #chart-container {
-            width: 700px;
-            height: 300px;
-            border: 1px solid #ccc; /* Set the color of the border to light grey */
-        }
-    </style>
+ 
 </head>
 
 <body>
