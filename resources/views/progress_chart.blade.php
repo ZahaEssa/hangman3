@@ -85,11 +85,7 @@
 
 
 
-    <div class="navigation">
-        <a href="{{ route('progress') }}">Back to Progress</a>
-        <a href="{{ route('progress_graph') }}">View Pie Chart</a>
-        <a href="{{ route('player_progress') }}">View Line Chart</a>
-    </div>
+   
 
     @if(Session::has('data'))
     <?php
@@ -99,7 +95,11 @@
         if($userId !== null) {
             $groupedResult = DB::select('SELECT level, category, SUM(score) as total_score FROM games WHERE player_id = ? GROUP BY level, category', [$userId]);
     ?>
-           
+            <div class="navigation">
+        <a href="{{ route('progress') }}">Back to Progress</a>
+        <a href="{{ route('progress_graph') }}">View Pie Chart</a>
+        <a href="{{ route('player_progress') }}">View Line Chart</a>
+    </div>
 
             <div id="chartContainer">
                 <div id="chartWrapper">
