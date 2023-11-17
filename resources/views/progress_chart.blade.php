@@ -46,6 +46,7 @@
  <div class="navigation">
         <a href="{{ route('progress') }}">Back to Progress</a>
         <a href="{{ route('progress_graph') }}">View Pie Chart</a>
+        <a href="{{ route('player_progress') }}">View Line Chart</a>
     </div>
 
     <?php

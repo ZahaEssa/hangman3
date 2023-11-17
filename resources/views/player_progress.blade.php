@@ -8,40 +8,63 @@
     <title>User Progress</title>
     <style>
         body {
-            
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh; /* Set to the desired height of the chart container */
             margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .navigation {
+            display: flex;
+            justify-content: space-around;
+            background-color: #333;
+            padding: 10px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .navigation a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.2em;
+            padding: 8px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .navigation a:hover {
+            background-color: #555;
         }
 
         #chart-container {
             width: 700px;
             height: 300px;
-            border: 1px solid #ccc; /* Set the color of the border to light grey */
+            border: 1px solid #ccc;
+            margin-top: 20px;
         }
     </style>
 </head>
 
 <body>
 
+    <div class="navigation">
+        <a href="{{ route('progress') }}">Back to Progress</a>
+        <a href="{{ route('progress_graph') }}">View Pie Chart</a>
+        <a href="{{ route('progress_chart') }}">View Bar Chart</a>
+    </div>
+
     @php
     use Illuminate\Support\Facades\Session;
     use Illuminate\Support\Facades\DB;
     @endphp
 
-    {{-- Check if the 'data' key exists in the session --}}
     @if(Session::has('data'))
-        {{-- Get the username from the session --}}
         @php $username = Session::get('data'); @endphp
-
-        {{-- Get the user ID from the session if it's stored there --}}
         @php $userId = Session::get('gamer_id'); @endphp
 
-        {{-- If the user is logged in --}}
         @if($userId !== null)
-            {{-- Query to retrieve the grouped data --}}
             @php
                 $groupedResult = DB::table('games')
                     ->select('created_at', DB::raw('SUM(score) as total_score'))
@@ -50,16 +73,13 @@
                     ->get();
             @endphp
 
-            {{-- If there are results, display a line chart --}}
             @if(count($groupedResult) > 0)
-                {{-- Create a container for the line chart --}}
                 <canvas id="lineChart" width="1000" height="300"></canvas>
                 <script>
                     var groupedData = <?php echo json_encode($groupedResult); ?>;
                     var labels = groupedData.map(item => item.created_at);
                     var data = groupedData.map(item => item.total_score);
 
-                    // Create a line chart
                     var ctx = document.getElementById('lineChart').getContext('2d');
                     var myChart = new Chart(ctx, {
                         type: 'line',
@@ -99,7 +119,7 @@
         @endif
     @else
         <p>Guest</p>
-        @php $userId = null; // In case the user is not logged in, you might not have a user ID. @endphp
+        @php $userId = null; @endphp
     @endif
 
 </body>

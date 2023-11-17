@@ -79,6 +79,7 @@
     <div class="navigation">
         <a href="{{ route('progress') }}">Back to Progress</a>
         <a href="{{ route('progress_chart') }}">View Bar Chart</a>
+        <a href="{{ route('player_progress') }}">View Line Chart</a>
     </div>
 
     <!-- Legend for the chart -->
