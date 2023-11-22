@@ -8,8 +8,10 @@
     <script src="https://code.jquery.com/jquery-3.6.4.min.js" defer></script>
     <script src="https://d3js.org/d3.v6.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.5/xlsx.full.min.js"></script>
+
     <title>Pie Chart</title>
-    
+
 </head>
 
 <body>
@@ -20,13 +22,15 @@
 
     @if(Session::has('data'))
     <script>
-        
+
     </script>
 
     <div class="navigation">
         <a href="{{ route('progress') }}">Back to Progress</a>
         <a href="{{ route('progress_chart') }}">View Bar Chart</a>
         <a href="{{ route('player_progress') }}">View Line Chart</a>
+        <button onclick="exportToPDF()">Export to PDF</button>
+        <button onclick="exportToExcel()">Export to Excel</button>
     </div>
 
     @php $username = Session::get('data'); @endphp
@@ -41,7 +45,7 @@
         ->groupBy('level', 'category')
         ->get();
     @endphp
-    
+
     <!-- Container for the D3.js pie chart and legend -->
    <!-- ... (previous HTML code) -->
 
@@ -150,9 +154,28 @@
         .text(function (d) {
             return d.level + ' - ' + d.category;
         });
+        function exportToPDF() {
+            var chartContainer = document.getElementById('chart-container');
+
+            html2pdf(chartContainer, {
+                margin: 10,
+                filename: 'pie_chart.pdf',
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: { scale: 2 },
+                jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+            });
+        }
+
+        function exportToExcel() {
+            var wb = XLSX.utils.book_new();
+            var ws = XLSX.utils.json_to_sheet(groupedData);
+
+            XLSX.utils.book_append_sheet(wb, ws, 'Progress Data');
+            XLSX.writeFile(wb, 'progress_data.xlsx');
+        }
 </script>
 
-<!-- ... (remaining HTML code) -->
+
 
 
     @endif
