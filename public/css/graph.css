@@ -5,6 +5,16 @@
     padding: 10px;
     margin-bottom: 20px;
 }
+button{
+    background-color: #333;
+    color: white;
+    text-decoration: none;
+    font-size: 1.2em;
+    padding: 8px;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+
+}
 
 .navigation a {
     color: white;
@@ -15,7 +25,7 @@
     transition: background-color 0.3s;
 }
 
-.navigation a:hover {
+.navigation a:hover, button:hover {
     background-color: #555;
 }
 
@@ -82,7 +92,7 @@ margin-right: 8px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    margin-top: auto; 
-    margin-bottom: 20px; 
+    margin-top: auto;
+    margin-bottom: 20px;
     font-size:30px;
 }
