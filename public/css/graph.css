@@ -1,0 +1,98 @@
+.navigation {
+    display: flex;
+    justify-content: space-around;
+    background-color: #333;
+    padding: 10px;
+    margin-bottom: 20px;
+}
+button{
+    background-color: #333;
+    color: white;
+    text-decoration: none;
+    font-size: 1.2em;
+    padding: 8px;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+
+}
+
+.navigation a {
+    color: white;
+    text-decoration: none;
+    font-size: 1.2em;
+    padding: 8px;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.navigation a:hover, button:hover {
+    background-color: #555;
+}
+
+#chart-container {
+display: flex;
+flex-direction: column; /* Stack items vertically */
+align-items: center; /* Center items horizontally */
+margin-top: 20px; /* Adjust the margin to create space between chart and legend */
+}
+
+#legend {
+display: flex;
+justify-content: center; /* Center items horizontally within the legend */
+margin-top: 20px; /* Add margin to separate pie chart and legend */
+}
+
+.legend-item {
+display: flex;
+align-items: center;
+margin-right: 20px; /* Add some space between legend items */
+}
+
+.legend-color {
+width: 20px;
+height: 20px;
+margin-right: 8px;
+}
+
+#d3PieChart {
+    width: 400px;
+    height: 400px;
+}
+
+.tooltip {
+    position: absolute;
+    text-align: center;
+    padding: 8px;
+    font-size: 14px;
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.login-message {
+    background-color: #f8d7da; /* Light red background color */
+    color: #721c24; /* Dark red text color */
+    padding: 15px; /* Padding around the message */
+    border: 1px solid #f5c6cb; /* Border color */
+    border-radius: 5px; /* Rounded corners */
+    margin-top: 20px; /* Top margin */
+    text-align: center; /* Center text */
+}
+
+.login-link {
+    color: #721c24; /* Dark red text color for the link */
+    font-weight: bold; /* Bold text for the link */
+    text-decoration: underline; /* Underline for the link */
+}
+#username {
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-top: auto;
+    margin-bottom: 20px;
+    font-size:30px;
+}

@@ -27,19 +27,19 @@
 <div class="button-container">
     <div class="category easy">
         <h2>Easy</h2>
-        <button onclick="startGame('easy', 'Animals');">Animals</button>
-        <button onclick="startGame('easy', 'Fruits');">Fruits</button>
+        <button onclick="startGame('Easy', 'Animals');">Animals</button>
+        <button onclick="startGame('Easy', 'Fruits');">Fruits</button>
     </div>
 
     <div class="category medium">
         <h2>Medium</h2>
-        <button onclick="startGame('medium', 'Capital_cities');">Capital Cities</button>
-        <button onclick="startGame('medium', 'Colors');">Colors</button>
+        <button onclick="startGame('Medium', 'Capital_Cities');">Capital Cities</button>
+        <button onclick="startGame('Medium', 'Colors');">Colors</button>
     </div>
 
     <div class="category hard">
         <h2>Hard</h2>
-        <button onclick="startGame('hard', 'difficult');">Random Word</button>
+        <button onclick="startGame('Hard', 'Difficult');">Random Word</button>
     </div>
     <div class="category hard">
         <h2>Progress</h2>
@@ -107,13 +107,24 @@
               </div>
             </div>
             <div class="row">
-              <div class="col-md-6">
-                <p>Level</p>
-              </div>
-              <div class="col-md-5">
-                <p id="level"></p>
-              </div>
-            </div>
+    <div class="col-md-6">
+        <p>Level</p>
+    </div>
+    <div class="col-md-6">
+        <p id="level"></p>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6">
+        <p>Category</p>
+    </div>
+    <div class="col-md-6">
+        <p id="categoryValue"></p>
+    </div>
+</div>
+
+
+            
             <div class="row" style="margin-top: 20px;">
               <div class="col-md-6">
                 <p>Chances Left</p>
@@ -166,14 +177,14 @@
                       <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Category</a>
                         <ul class="dropdown-menu">
-                          <li id="easyGame"><a href="#" onclick="changeLevel('easy','Animals');">Easy-Animals</a></li>
-                          <li id="easyGame"><a href="#" onclick="changeLevel('easy','Fruits');">Easy-Fruits</a></li>
+                          <li id="easyGame"><a href="#" onclick="changeLevel('Easy','Animals');">Easy-Animals</a></li>
+                          <li id="easyGame"><a href="#" onclick="changeLevel('Easy','Fruits');">Easy-Fruits</a></li>
 
 
-                          <li id="mediumGame"><a href="#" onclick="changeLevel('medium','Capital_cities');">Medium-Capital Cities</a></li>
-                          <li id="mediumGame"><a href="#" onclick="changeLevel('medium','Colors');">Medium-Colors</a></li>
+                          <li id="mediumGame"><a href="#" onclick="changeLevel('Medium','Capital_Cities');">Medium-Capital Cities</a></li>
+                          <li id="mediumGame"><a href="#" onclick="changeLevel('Medium','Colors');">Medium-Colors</a></li>
 
-                          <li id="hardGame"><a href="#" onclick="changeLevel('hard','difficult');">Hard- Random word</a></li>
+                          <li id="hardGame"><a href="#" onclick="changeLevel('Hard','Difficult');">Hard- Random word</a></li>
 
                         </ul>
                       </li>
@@ -250,5 +261,5 @@ function keyPressed(press) {
 </script>
 
 
-  </body>
+  </body>
 </html>

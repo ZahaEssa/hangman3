@@ -1,5 +1,5 @@
 var categories = {
-  easy: {
+  Easy: {
   Fruits: [ 
   "APPLE",
     "BANANA",
@@ -79,8 +79,8 @@ var categories = {
   "GIRAFFE",]
   },
 
-  medium: {
-  Capital_cities: [
+  Medium: {
+  Capital_Cities: [
   "LONDON",
   "PARIS",
   "ROME",
@@ -214,8 +214,8 @@ var categories = {
   ]
   },
 
-  hard: {
-  difficult: [
+  Hard: {
+  Difficult: [
   "AIRPLANE",  
   "BACKPACK",  
   "BANJO",

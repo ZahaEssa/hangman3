@@ -13,6 +13,8 @@ class CreateGamesTable extends Migration
             $table->integer('score');
             $table->string('level', 200);
             $table->string('category', 300);
+          
+
         });
     }
 
