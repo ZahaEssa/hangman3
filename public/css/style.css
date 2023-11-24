@@ -5,7 +5,6 @@
 body {
   padding-top: 2vh;
 
-<<<<<<< HEAD
   /* Style the individual buttons within the Easy category */
   .category.easy button {
     width: 100%;
@@ -19,19 +18,16 @@ body {
     transition: background-color 0.3s;
     border-radius: 5px;
   }
-=======
   font-family: Arial, sans-serif; /* Change the font family to your preference */
   background-color: #f2f2f2;
   box-sizing: border-box;
 }
->>>>>>> 683c2f3f2f7d31d6e87819b0174019f6f582b9f2
 
 h1, h2 {
   color: salmon;
   -webkit-text-stroke: 1px salmon;
 }
 
-<<<<<<< HEAD
   /* Style the individual buttons within the Medium category */
   .category.medium button {
     width: 100%;
@@ -45,18 +41,15 @@ h1, h2 {
     transition: background-color 0.3s;
     border-radius: 5px;
   }
-=======
 h1 {
   font-size: 7.5vh;
   margin-bottom: 5vh;
 }
->>>>>>> 683c2f3f2f7d31d6e87819b0174019f6f582b9f2
 
 h2 {
   font-size: 5vh;
 }
 
-<<<<<<< HEAD
   /* Style the individual buttons within the Hard category */
   .category.hard button {
     width: 100%;
@@ -71,12 +64,12 @@ h2 {
     height:68%;
     border-radius: 5px;
   }
-=======
+
 nav li, nav a {
   color: black;
   font-size: 3vh;
 }
->>>>>>> 683c2f3f2f7d31d6e87819b0174019f6f582b9f2
+
 
 nav p {
   margin-left: 4%;
