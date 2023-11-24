@@ -2,7 +2,7 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    height: 100vh; /* Set to the desired height of the chart container */
+    height: 100vh; 
     box-sizing: border-box;
 
 }
