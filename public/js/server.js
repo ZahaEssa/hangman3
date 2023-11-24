@@ -1,5 +1,5 @@
 const express = require('express');
-const mysql = require('mysql2');
+const mysql = require('mysql');
 const app = express();
 const port = 3000;
 const winston = require('winston');
@@ -16,24 +16,19 @@ const logger = winston.createLogger({
 const db = mysql.createConnection({
   host: 'localhost',
   user: 'root',
-  password: 'MainaWanjiru1980?',
+  password: 'roots',
   database: 'hangman',
-  multipleStatements:true,
 });
 
 // Connect to the database
-// Connect to the database
 db.connect((err) => {
-    if (err) {
-      console.error('Database connection failed:', err);
-      logger.error('Database connection failed: ' + err.stack);
-      process.exit(1);
-    } else {
-      console.log('Connected to the database');
-      logger.info('Connected to the database');
-    }
-  });
-
+  if (err) {
+    logger.error('Database connection failed: ' + err.stack);
+    process.exit(1); // Terminate the application if the database connection fails.
+  } else {
+    logger.info('Connected to the database');
+  }
+});
 app.use(cors());
 
 // Middleware to parse JSON in request body
