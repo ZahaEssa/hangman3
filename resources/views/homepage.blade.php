@@ -82,6 +82,19 @@
       <div class="row">
         <div class="col-lg-3 col-lg-offset-1 col-md-3 col-md-offset-1 hidden-sm hidden-xs visible-md visible-lg visible-xl sectionBorder">
           <div id="scoreboard">
+
+
+          <div class="row">
+              <div class="col-md-6">
+                <p>Time Left</p>
+              </div>
+              <div class="col-md-5 scoreboardScore">
+                <p id="timerDisplay">30</p>
+              </div>
+              <div class="col-md-12">
+                <div class="col-md-12">
+
+                  </div>
             <div class="row">
               <div class="col-md-6">
                 <p>Score</p>
@@ -141,17 +154,7 @@
                 <p id="lastLetter">-</p>
               </div>
             </div>
-            <div class="row">
-              <div class="col-md-6">
-                <p>Time Left</p>
-              </div>
-              <div class="col-md-5 scoreboardScore">
-                <p id="timerDisplay">30</p>
-              </div>
-              <div class="col-md-12">
-                <div class="col-md-12">
-
-                  </div>
+         
 
               </div>
             </div>
