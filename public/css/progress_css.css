@@ -26,7 +26,6 @@ table {
     background-color: #ddd;
   }
 
-  /* Additional styles for a more beautiful table */
   th, td {
     transition: background-color 0.3s, color 0.3s;
   }
