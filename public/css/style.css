@@ -271,6 +271,7 @@
     border: none; /* Remove button border */
     cursor: pointer;
     transition: background-color 0.3s;
+    border-radius: 5px;
   }
 
   .category.easy button:hover {
@@ -288,6 +289,7 @@
     border: none; /* Remove button border */
     cursor: pointer;
     transition: background-color 0.3s;
+    border-radius: 5px;
   }
 
   .category.medium button:hover {
@@ -305,7 +307,8 @@
     border: none; /* Remove button border */
     cursor: pointer;
     transition: background-color 0.3s;
-    height:68%
+    height:68%;
+    border-radius: 5px;
   }
 
   .category.hard button:hover {
