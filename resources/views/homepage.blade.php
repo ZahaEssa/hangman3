@@ -194,6 +194,7 @@
                     <li><a href="#" onclick="resumeGame();">Resume</a></li>
                     <li><a href="#" onclick="restart();">Restart</a></li>
                     <li><a href="{{ route('progress') }}">View Progress</a>
+                    <li><a href="{{route('homepage')}}">Quit</a>
 
                       <li class="visible-sm visible-xs invisible-md invisible-lg invisible-xl"><p>Score: <span id="scorePhone">0</span></p></li>
                       <li class="visible-sm visible-xs invisible-md invisible-lg invisible-xl"><p>Wins: <span id="winsPhone">0</span></p></li>
