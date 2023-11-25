@@ -63,7 +63,7 @@
     @endif
 </div>
 <footer>
-  &copy; 2023 Hangman. All rights reserved.
+  &copy; <?php echo date("Y"); ?> Hangman. All rights reserved.
 </footer>
 </div>
 
