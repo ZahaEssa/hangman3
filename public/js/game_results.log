@@ -5,3 +5,5 @@
 {"level":"info","message":"Game result logged: User ID 1, Result 30, Level Easy, Category Animals"}
 {"level":"info","message":"Game result logged: User ID 1, Result 75, Level Medium, Category Colors"}
 {"level":"info","message":"Game result logged: User ID 1, Result 30, Level Easy, Category Animals"}
+{"level":"info","message":"Server is running on port 3000"}
+{"level":"info","message":"Connected to the database"}
