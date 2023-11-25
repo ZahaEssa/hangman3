@@ -62,6 +62,9 @@
         @endphp
     @endif
 </div>
+<footer>
+  &copy; 2023 Hangman. All rights reserved.
+</footer>
 </div>
 
     <div id="helpScreen" style="visibility: hidden;">
