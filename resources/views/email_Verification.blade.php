@@ -14,18 +14,19 @@
     <div class="container">
         <div class="card">
             <div class="card-header">
-            <h2>Email Verification</h2>
-    </div>
+                <h2>Email Verification</h2>
+            </div>
             <div class="card-body">
-                    <img src="images/index/happy.jpg" alt="Image" class="image-blend">
+                <img src="images/index/happy.jpg" alt="Image" class="image-blend">
                 <p class="text-center">
-                A verification email will be sent to your provided email address. Please click the verification link in the email to activate your account and complete the registration process.
-            </p>
-            @if(session('error'))
-                            <div class="alert alert-danger">
-                                {{ session('error') }}
-                            </div>
-            @endif
+                    A verification email will be sent to your provided email address. Please click the verification link in the email to activate your account and complete the registration process.
+                </p>
+                <!-- Display general error message, if any -->
+                @if(session('error'))
+                    <div class="alert alert-danger">
+                        {{ session('error') }}
+                    </div>
+                @endif
                 <form action="{{ route('send-email') }}" method="POST">
                     @csrf
                     <div class="form-group">
@@ -33,8 +34,13 @@
                         <input type="text" class="form-control" id="fullname" name="fullname" required>
                     </div>
                     <div class="form-group">
-                        <label for= "email">Email:</label>
+                        <label for="email">Email:</label>
                         <input type="email" class="form-control" id="email" name="email" required>
+
+                        <!-- Display error message for email validation -->
+                        @error('email')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
                     </div>
                     <div class="form-group text-center">
                         <input type="submit" value="Send" name="send" class="btn btn-primary">
