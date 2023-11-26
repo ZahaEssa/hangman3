@@ -21,8 +21,9 @@ class EmailController extends Controller
         $verificationUrl = route('emailverification', ['token' => $token]);
         $expire = date("Y-m-d H:i:s", strtotime("+2 hours"));
 
-        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            return redirect()->back()->with('error', 'The email provided is invalid.');
+        // Check if the email already exists
+        if (User::where('email', $email)->exists()) {
+            return redirect()->back()->with('error', 'The email provided is already in use. Please enter another email address');
         }
 
         $user = User::updateOrInsert(
@@ -49,4 +50,5 @@ class EmailController extends Controller
         }
     }
 }
+
 ?>
